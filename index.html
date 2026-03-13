@@ -7,8 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+/* ── RESET & BASE ── */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
+  /* Stelvai Light Brand System */
   --ink:#0c0e1f;--ink2:#1e2140;--ink3:#2a2d50;
   --border:#d0d4e8;--border2:#b8bdd8;
   --lime:#00c875;--lime2:#00a860;
@@ -22,8 +24,16 @@
 html{scroll-behavior:smooth}
 body{background:var(--snow);color:var(--text);font-family:'Bricolage Grotesque',sans-serif;overflow-x:hidden;min-height:100vh}
 .display{font-family:'Bricolage Grotesque',sans-serif}
+
+/* ── VIEWS ── */
 #view-landing{display:block}
 #view-dashboard{display:none}
+
+/* ══════════════════════════════════════
+   LANDING PAGE
+══════════════════════════════════════ */
+
+/* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(247,248,252,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:'Bricolage Grotesque',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-0.04em;display:flex;align-items:center;gap:0.4rem}
 .nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--lime);display:inline-block}
@@ -35,37 +45,87 @@ body{background:var(--snow);color:var(--text);font-family:'Bricolage Grotesque',
 .btn-ghost:hover{border-color:var(--lime);color:var(--lime)}
 .btn-lime{background:var(--lime);color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;font-size:.88rem;font-weight:700;padding:.55rem 1.3rem;border-radius:8px;border:none;cursor:pointer;transition:all .2s;letter-spacing:-.01em}
 .btn-lime:hover{background:var(--lime2);transform:translateY(-1px)}
+
+/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 1.5rem 5rem;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .hero-bg::before{content:'';position:absolute;width:800px;height:800px;left:50%;top:10%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(0,200,117,.07) 0%,transparent 65%)}
 .hero-bg::after{content:'';position:absolute;width:600px;height:600px;right:-100px;bottom:-100px;background:radial-gradient(ellipse,rgba(79,99,255,.05) 0%,transparent 65%)}
 .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(14,18,50,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(14,18,50,.035) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+
 .hero-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,200,117,.08);border:1px solid rgba(0,200,117,.3);color:var(--lime);font-size:.78rem;font-weight:600;padding:.35rem 1rem;border-radius:100px;margin-bottom:2.5rem;letter-spacing:.06em;text-transform:uppercase}
 .hero-pill::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--lime);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
 .hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(3.2rem,7vw,6.5rem);font-weight:800;line-height:.95;letter-spacing:-.05em;max-width:1000px;margin-bottom:1.75rem}
 .hero h1 em{font-style:normal;color:var(--lime)}
+.hero h1 .muted-word{color:var(--muted)}
 .hero-sub{font-size:1.15rem;color:var(--muted2);max-width:560px;line-height:1.7;margin-bottom:2.5rem;font-weight:400}
+
 .hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3.5rem}
 .btn-hero{background:var(--lime);color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;padding:.9rem 2rem;border-radius:10px;border:none;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.5rem}
 .btn-hero:hover{background:var(--lime2);transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,200,117,.25)}
 .btn-hero-outline{background:transparent;color:var(--text);font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:.95rem;padding:.9rem 2rem;border-radius:10px;border:1.5px solid var(--border2);cursor:pointer;transition:all .2s}
+.btn-hero-outline:hover{border-color:var(--muted2)}
+
+/* TYPEWRITER */
+.hero-typewriter{display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--muted);margin-bottom:3rem}
 .ai-badge{display:inline-flex;align-items:center;gap:.3rem;background:var(--card);border:1px solid var(--border);padding:.3rem .7rem;border-radius:100px;font-size:.75rem;color:var(--muted2);margin:.2rem}
+
+/* MARQUEE */
 .marquee-wrap{width:100%;overflow:hidden;padding:.7rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:0}
 .marquee{display:flex;gap:3.5rem;animation:marquee 28s linear infinite;white-space:nowrap}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .marquee-item{font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:.5rem}
 .marquee-dot{width:5px;height:5px;border-radius:50%;background:var(--lime)}
+
+/* LOGOS */
 .logos-row{display:flex;gap:2.5rem;align-items:center;justify-content:center;flex-wrap:wrap;padding:3rem 2rem;border-bottom:1px solid var(--border)}
 .logo-chip{font-family:'Bricolage Grotesque',sans-serif;font-size:.8rem;font-weight:600;color:var(--muted);letter-spacing:.05em;padding:.4rem .9rem;border:1px solid var(--border);border-radius:100px}
+
+/* STATS ROW */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);max-width:900px;margin:5rem auto;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .stat-box{background:var(--card);padding:2.5rem;text-align:center}
 .stat-num{font-family:'Bricolage Grotesque',sans-serif;font-size:3.2rem;font-weight:800;color:var(--lime);letter-spacing:-.06em;line-height:1}
 .stat-label{font-size:.85rem;color:var(--muted);margin-top:.6rem;line-height:1.5}
+
+/* SECTION SHARED */
 .section{padding:6rem 1.5rem;max-width:1120px;margin:0 auto}
 .section-eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.15em;color:var(--lime);text-transform:uppercase;margin-bottom:1rem}
 .section-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:1rem;color:var(--ink)}
 .section-sub{color:var(--muted2);font-size:1rem;max-width:500px;line-height:1.75}
+
+/* ── SECTION BACKGROUNDS — explicit light theme for mobile ── */
+#view-landing{background:var(--snow)}
+.hero,.logos-row,.stats-row,.faq,.cta-inner,footer{background:var(--white)}
+section.section{background:var(--white)}
+section.section:nth-of-type(even){background:var(--snow)}
+.section#features{background:var(--snow)}
+.section#how{background:var(--white)}
+.section#pricing{background:var(--snow)}
+/* Stats wrapper */
+.stats-row .stat-box{background:var(--white)}
+/* Step cards get light bg */
+.step{background:var(--white);border:1px solid var(--border);border-radius:var(--radius)}
+/* Plan cards */
+.plan{background:var(--white)}
+.plan.hot{background:linear-gradient(160deg,var(--white) 0%,rgba(0,200,117,.04) 100%)}
+/* Bento cards */
+.bento-card{background:var(--white)}
+/* FAQ rows */
+.faq-item{background:var(--white)}
+
+/* SECTION BACKGROUNDS — explicit for mobile */
+#view-landing{background:var(--snow)}
+.hero{background:var(--white)}
+.marquee-wrap{background:var(--white)}
+.logos-row{background:var(--white)}
+.stats-section{background:var(--white)}
+.features-section{background:var(--snow)}
+.steps-section{background:var(--white)}
+.pricing-section{background:var(--snow)}
+.faq-section{background:var(--white)}
+.cta-band{background:var(--snow)}
 .bento{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3.5rem}
 .bento-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
 .bento-card:hover{border-color:var(--border2);transform:translateY(-2px)}
@@ -81,18 +141,23 @@ body{background:var(--snow);color:var(--text);font-family:'Bricolage Grotesque',
 .score-chip{font-size:.7rem;font-weight:700;padding:.15rem .5rem;border-radius:100px}
 .score-high{background:rgba(0,200,117,.12);color:var(--lime);border:1px solid rgba(0,200,117,.2)}
 .score-mid{background:rgba(251,113,133,.1);color:var(--rose);border:1px solid rgba(251,113,133,.2)}
+
+/* HOW IT WORKS */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
-.step{padding:1.75rem;position:relative;background:var(--white);border:1px solid var(--border);border-radius:var(--radius)}
+.step{padding:1.75rem;position:relative}
 .step-num{font-family:'Bricolage Grotesque',sans-serif;font-size:4rem;font-weight:800;color:rgba(0,200,117,.18);line-height:1;margin-bottom:.75rem}
 .step h3{font-family:'Bricolage Grotesque',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.5rem}
 .step p{font-size:.85rem;color:var(--muted2);line-height:1.7}
+.step-connector{position:absolute;top:2.5rem;right:-0.75rem;width:1.5rem;height:1px;background:var(--border);display:none}
+
+/* PRICING */
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
 .plan{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;position:relative}
 .plan.hot{border-color:rgba(0,200,117,.35);background:linear-gradient(160deg,var(--card) 0%,rgba(0,200,117,.03) 100%)}
 .plan-hot-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--lime);color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.68rem;padding:.2rem .85rem;border-radius:100px;letter-spacing:.03em;white-space:nowrap}
 .plan-name{font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
 .plan-price{font-family:'Bricolage Grotesque',sans-serif;font-size:2.8rem;font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--text);margin-bottom:.2rem}
-.plan-price span{font-size:1rem;color:var(--muted);font-weight:400}
+.plan-price span{font-size:1rem;color:var(--muted);font-weight:400;font-family:'Bricolage Grotesque',sans-serif}
 .plan-desc{font-size:.82rem;color:var(--muted);margin:.75rem 0 1.25rem;line-height:1.6}
 .plan-divider{height:1px;background:var(--border);margin:1.25rem 0}
 .plan-feats{list-style:none;margin-bottom:1.75rem}
@@ -102,6 +167,9 @@ body{background:var(--snow);color:var(--text);font-family:'Bricolage Grotesque',
 .plan-feats li.dim{color:var(--muted);opacity:.5}
 .plan-cta{width:100%;padding:.85rem;border-radius:9px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;border:1px solid var(--border2);background:transparent;color:var(--text)}
 .plan.hot .plan-cta{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.plan.hot .plan-cta:hover{background:var(--lime2)}
+
+/* FAQ */
 .faq{max-width:760px;margin:3.5rem auto 0}
 .faq-item{border-bottom:1px solid var(--border);overflow:hidden}
 .faq-q{width:100%;text-align:left;padding:1.25rem 0;display:flex;justify-content:space-between;align-items:center;background:transparent;border:none;color:var(--text);font-family:'Bricolage Grotesque',sans-serif;font-size:.95rem;font-weight:500;cursor:pointer;transition:color .2s}
@@ -111,52 +179,92 @@ body{background:var(--snow);color:var(--text);font-family:'Bricolage Grotesque',
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
 .faq-item.open .faq-a{max-height:200px;padding-bottom:1.25rem}
 .faq-a p{font-size:.88rem;color:var(--muted2);line-height:1.7}
+
+/* CTA BAND */
 .cta-band{margin:0 auto 6rem;max-width:1120px;padding:0 1.5rem}
 .cta-inner{background:var(--white);border:1.5px solid rgba(0,200,117,.25);border-radius:20px;padding:4rem;text-align:center;position:relative;overflow:hidden}
+.cta-inner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(0,200,117,.05),transparent);pointer-events:none}
 .cta-inner h2{font-family:'Bricolage Grotesque',sans-serif;font-size:2.5rem;font-weight:800;letter-spacing:-.04em;margin-bottom:1rem}
 .cta-inner p{color:var(--muted2);font-size:1rem;margin-bottom:2rem}
 .cta-email{display:flex;gap:.75rem;justify-content:center;max-width:440px;margin:0 auto}
 .cta-email input{flex:1;background:var(--white);border:1px solid var(--border2);color:var(--text);font-family:'Bricolage Grotesque',sans-serif;font-size:.9rem;padding:.75rem 1rem;border-radius:9px;outline:none}
+.cta-email input:focus{border-color:var(--lime)}
+
+/* FOOTER */
 footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:var(--muted)}
 .footer-logo{font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;letter-spacing:-.03em}
 .footer-links{display:flex;gap:1.75rem}
 .footer-links a{color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+
+/* ══════════════════════════════════════
+   DASHBOARD
+══════════════════════════════════════ */
 .db-wrap{display:flex;min-height:100vh;background:var(--snow)}
+
+/* SIDEBAR */
 .db-sidebar{width:240px;background:var(--card);border-right:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;z-index:100}
 .db-sidebar-logo{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;letter-spacing:-.03em;display:flex;align-items:center;gap:.4rem}
+.db-sidebar-logo .dot{width:7px;height:7px;border-radius:50%;background:var(--lime)}
 .db-nav{flex:1;padding:1rem 0}
 .db-nav-section{font-size:.68rem;font-weight:600;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;padding:.75rem 1.5rem .35rem}
 .db-nav-item{display:flex;align-items:center;gap:.75rem;padding:.65rem 1.5rem;font-size:.85rem;color:var(--muted2);cursor:pointer;transition:all .2s;border-left:2px solid transparent;font-weight:500}
 .db-nav-item:hover{color:var(--text);background:rgba(14,18,50,.06)}
 .db-nav-item.active{color:var(--lime);border-left-color:var(--lime);background:rgba(0,200,117,.04)}
+.db-nav-item .icon{font-size:1rem;width:18px;text-align:center}
 .db-sidebar-bottom{padding:1rem 1.5rem;border-top:1px solid var(--border)}
+.db-user{display:flex;align-items:center;gap:.75rem}
+.db-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--lime),var(--sky));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--ink);flex-shrink:0}
+.db-user-info{font-size:.78rem;color:var(--muted2);line-height:1.4}
+.db-user-name{color:var(--text);font-weight:600;font-size:.82rem}
+
+/* MAIN CONTENT */
 .db-main{margin-left:240px;flex:1;padding:2rem;min-height:100vh}
 .db-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem}
 .db-topbar h1{font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.03em}
+.db-topbar-right{display:flex;gap:.75rem;align-items:center}
 .db-badge{font-size:.72rem;font-weight:600;padding:.25rem .7rem;border-radius:100px;background:rgba(0,200,117,.1);color:var(--lime);border:1px solid rgba(0,200,117,.2)}
+
+/* DB PANELS */
 .db-panel{display:none}
 .db-panel.active{display:block}
+
+/* OVERVIEW PANEL */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
 .kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem}
 .kpi-label{font-size:.75rem;color:var(--muted);font-weight:500;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em}
 .kpi-val{font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;font-weight:800;letter-spacing:-.04em;line-height:1}
+.kpi-change{font-size:.75rem;margin-top:.4rem;display:flex;align-items:center;gap:.3rem}
 .kpi-up{color:var(--lime)}
+.kpi-down{color:var(--rose)}
+
 .db-grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .db-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
 .db-card-title{font-family:'Bricolage Grotesque',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between}
-.mention-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.85rem}
+.db-card-title .view-all{font-size:.72rem;color:var(--muted2);font-family:'Bricolage Grotesque',sans-serif;cursor:pointer}
+.db-card-title .view-all:hover{color:var(--lime)}
+
+/* AI MENTION BARS */
+.mention-row{display:flex;align-items:center;gap.75rem;margin-bottom:.85rem}
 .mention-platform{font-size:.8rem;width:90px;flex-shrink:0;color:var(--muted2)}
 .mention-bar-wrap{flex:1;background:var(--snow);border-radius:100px;height:8px;overflow:hidden}
 .mention-bar{height:100%;border-radius:100px;transition:width 1.2s ease}
 .mention-pct{font-size:.78rem;color:var(--muted2);width:36px;text-align:right;flex-shrink:0}
+
+/* LEAD ITEMS */
 .lead-item{display:flex;align-items:flex-start;justify-content:space-between;padding:.85rem 0;border-bottom:1px solid rgba(14,18,50,.06)}
+.lead-item:last-child{border-bottom:none}
 .lead-co{font-size:.85rem;font-weight:600;color:var(--text)}
+.lead-meta-row{font-size:.75rem;color:var(--muted);margin-top:.2rem}
 .score-pill{font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:100px;white-space:nowrap}
 .pill-green{background:rgba(0,200,117,.1);color:var(--lime);border:1px solid rgba(0,200,117,.2)}
 .pill-amber{background:rgba(251,191,36,.1);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
+
+/* BRAND MEMORY PANEL */
 .bm-tabs{display:flex;gap:0;background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.5rem;width:fit-content}
 .bm-tab{padding:.55rem 1.25rem;font-size:.82rem;font-weight:500;color:var(--muted2);cursor:pointer;border:none;background:transparent;transition:all .2s;font-family:'Bricolage Grotesque',sans-serif}
 .bm-tab.active{background:var(--lime);color:var(--ink);font-weight:600}
+
 .bm-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .bm-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
 .bm-section h3{font-family:'Bricolage Grotesque',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:1rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.08em}
@@ -167,52 +275,63 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
 .bm-textarea{min-height:80px}
 .bm-tag-list{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
 .bm-tag{display:inline-flex;align-items:center;gap:.35rem;font-size:.75rem;background:var(--snow);border:1px solid var(--border);border-radius:100px;padding:.25rem .65rem;color:var(--muted2)}
+.bm-tag .rm{cursor:pointer;color:var(--muted);font-size:.9rem;line-height:1}
+.bm-tag .rm:hover{color:var(--rose)}
 .bm-save{background:var(--lime);color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.85rem;padding:.65rem 1.5rem;border-radius:8px;border:none;cursor:pointer;transition:all .2s}
+.bm-save:hover{background:var(--lime2)}
 .bm-save-row{display:flex;justify-content:flex-end;margin-top:1rem;gap:.75rem}
 .ai-generating{display:flex;align-items:center;gap:.65rem;font-size:.82rem;color:var(--muted2);padding:1rem;background:rgba(0,200,117,.04);border:1px solid rgba(0,200,117,.15);border-radius:8px;margin-top:1rem}
 .mini-spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--lime);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* AI FEED PANEL */
+.feed-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.feed-url{font-size:.82rem;color:var(--muted2);background:var(--white);border:1px solid var(--border);padding:.4rem .85rem;border-radius:8px;display:flex;align-items:center;gap:.5rem}
+.feed-url .lock{color:var(--lime);font-size:.75rem}
 .feed-sections{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .feed-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
 .feed-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
 .feed-section-header h3{font-family:'Bricolage Grotesque',sans-serif;font-size:.9rem;font-weight:700}
 .feed-status{font-size:.7rem;font-weight:600;padding:.2rem .55rem;border-radius:100px}
 .feed-live{background:rgba(0,200,117,.1);color:var(--lime);border:1px solid rgba(0,200,117,.2)}
+.feed-draft{background:rgba(107,114,128,.1);color:var(--muted2);border:1px solid var(--border)}
 .feed-page-item{display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid rgba(14,18,50,.06);font-size:.82rem}
+.feed-page-item:last-child{border-bottom:none}
+.feed-page-title{color:var(--text);font-weight:500}
+.feed-page-url{font-size:.72rem;color:var(--muted);margin-top:.15rem}
 .feed-gen-btn{background:var(--white);border:1px solid var(--border);color:var(--muted2);font-family:'Bricolage Grotesque',sans-serif;font-size:.78rem;padding:.35rem .75rem;border-radius:6px;cursor:pointer;transition:all .2s}
-.feed-full-btn{width:100%;margin-top:1rem;background:var(--white);border:1px solid var(--border);color:var(--muted2);font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:.82rem;padding:.65rem;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.feed-gen-btn:hover{border-color:var(--lime);color:var(--lime)}
+.feed-full-btn{width:100%;margin-top:1rem;background:var(--white);border:1px solid var(--border);color:var(--muted2);font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:.82rem;padding:.65rem;border-radius:8px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.feed-full-btn:hover{border-color:var(--lime);color:var(--lime)}
 .feed-preview{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem;font-size:.75rem;color:var(--muted2);font-family:monospace;line-height:1.6;margin-top:.75rem;max-height:140px;overflow-y:auto}
+
+/* LEADS PANEL */
 .leads-toolbar{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.leads-search{flex:1;min-width:200px;background:var(--card);border:1px solid var(--border);color:var(--text);font-family:'Bricolage Grotesque',sans-serif;font-size:.85rem;padding:.6rem 1rem;border-radius:9px;outline:none}
+.leads-search{flex:1;min-width:200px;background:var(--card);border:1px solid var(--border);color:var(--text);font-family:'Bricolage Grotesque',sans-serif;font-size:.85rem;padding:.6rem 1rem;border-radius:9px;outline:none;transition:border-color .2s}
+.leads-search:focus{border-color:var(--lime)}
 .leads-filter{background:var(--card);border:1px solid var(--border);color:var(--muted2);font-family:'Bricolage Grotesque',sans-serif;font-size:.82rem;padding:.6rem .85rem;border-radius:9px;cursor:pointer;outline:none}
-.leads-run-btn{background:var(--lime);color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.82rem;padding:.6rem 1.2rem;border-radius:9px;border:none;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:.4rem}
+.leads-run-btn{background:var(--lime);color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.82rem;padding:.6rem 1.2rem;border-radius:9px;border:none;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:.4rem;transition:all .2s}
+.leads-run-btn:hover{background:var(--lime2)}
+.leads-run-btn:disabled{opacity:.5;cursor:not-allowed}
+
 .leads-table{width:100%;border-collapse:collapse}
 .leads-table th{font-size:.7rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:.6rem 1rem;text-align:left;border-bottom:1px solid var(--border);background:var(--card)}
 .leads-table td{padding:.85rem 1rem;border-bottom:1px solid rgba(14,18,50,.06);font-size:.83rem;vertical-align:top}
+.leads-table tr:hover td{background:rgba(14,18,50,.03)}
+.lead-row-co{font-weight:600;color:var(--text)}
+.lead-row-title{font-size:.75rem;color:var(--muted);margin-top:.15rem}
+.lead-query-cell{font-size:.78rem;color:var(--muted2);line-height:1.5;max-width:220px}
+.lead-query-source{font-size:.68rem;color:var(--lime);margin-top:.2rem;font-weight:600}
+.action-row{display:flex;gap:.4rem}
 .act-btn{font-size:.72rem;padding:.3rem .65rem;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted2);cursor:pointer;font-family:'Bricolage Grotesque',sans-serif;transition:all .2s;white-space:nowrap}
+.act-btn:hover{border-color:var(--lime);color:var(--lime)}
 .act-btn.primary{background:rgba(0,200,117,.1);border-color:rgba(0,200,117,.25);color:var(--lime)}
+
+/* TOAST */
 .toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;background:var(--card2);border:1px solid var(--lime);color:var(--text);padding:.9rem 1.25rem;border-radius:12px;font-size:.85rem;max-width:300px;box-shadow:0 20px 60px rgba(0,0,0,.5);transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none}
 .toast.show{transform:translateY(0);opacity:1}
 .toast-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;color:var(--lime);margin-bottom:.15rem;font-size:.9rem}
-.audit-result-box{background:var(--snow);border:1px solid var(--border);border-radius:10px;padding:1rem;font-size:.83rem;color:var(--text);line-height:1.75;min-height:90px;white-space:pre-wrap;word-break:break-word}
-.audit-result-box.audit-placeholder{color:var(--muted);font-style:italic;display:flex;align-items:center}
-.audit-result-box.loading{display:flex;align-items:center;gap:.75rem;color:var(--muted2)}
-.audit-result-box.has-result{background:var(--white);border-color:rgba(0,200,117,.15)}
-.audit-mention-highlight{background:rgba(0,200,117,.12);color:#00875a;font-weight:700;padding:0 .2em;border-radius:3px;border-bottom:2px solid rgba(0,200,117,.4)}
-.audit-status-badge{font-size:.68rem;font-weight:700;padding:.2rem .65rem;border-radius:100px;white-space:nowrap;flex-shrink:0}
-.audit-badge-idle{background:rgba(146,151,181,.1);color:var(--muted2);border:1px solid var(--border)}
-.audit-badge-running{background:rgba(0,200,117,.1);color:var(--lime);border:1px solid rgba(0,200,117,.25);animation:pulse-badge 1.2s ease-in-out infinite}
-.audit-badge-done{background:rgba(0,200,117,.12);color:#00875a;border:1px solid rgba(0,200,117,.3)}
-.audit-badge-miss{background:rgba(255,68,102,.1);color:var(--rose);border:1px solid rgba(255,68,102,.2)}
-@keyframes pulse-badge{0%,100%{opacity:1}50%{opacity:.5}}
-.audit-score-row{display:flex;align-items:center;gap:.75rem;margin-top:.85rem;padding-top:.75rem;border-top:1px solid var(--border)}
-.audit-score-bar-wrap{flex:1;background:var(--snow);border-radius:100px;height:6px;overflow:hidden}
-.audit-score-bar{height:100%;border-radius:100px;transition:width 1s ease}
-#key-modal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center}
-.key-modal-box{background:var(--card);border:1px solid rgba(0,200,117,.25);border-radius:20px;padding:2.5rem;max-width:480px;width:90%;text-align:center}
-.key-modal-box h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.04em;margin-bottom:.5rem}
-.key-modal-input{width:100%;background:var(--white);border:1px solid var(--border2);color:var(--text);font-family:monospace;font-size:.82rem;padding:.75rem 1rem;border-radius:9px;outline:none;margin-bottom:.5rem}
-.key-modal-btn{width:100%;background:var(--lime);color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;padding:.8rem;border-radius:9px;border:none;cursor:pointer}
+
 @media(max-width:768px){
   .nav-links,.nav-right .btn-ghost{display:none}
   .bento,.db-grid2,.bm-grid,.feed-sections,.steps,.pricing-grid,.stats-row,.kpi-grid{grid-template-columns:1fr}
@@ -221,8 +340,14 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
   .db-main{margin-left:0}
 }
 </style>
-</head><body>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     LANDING PAGE
+═══════════════════════════════════ -->
 <div id="view-landing">
+
 <nav class="nav">
   <div class="nav-logo">
     <svg width="26" height="26" viewBox="0 0 44 44" fill="none" style="flex-shrink:0">
@@ -246,7 +371,10 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
     <button class="btn-lime" onclick="openDashboard()">Start Free →</button>
   </div>
 </nav>
+
+<!-- HERO -->
 <style>
+/* ── HERO TYPEWRITER ── */
 .hero-headline-wrap{text-align:center;margin-bottom:1.75rem}
 .hero-line1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2rem,3.8vw,3.4rem);font-weight:700;letter-spacing:-.04em;color:var(--muted2);line-height:1.1;margin-bottom:.15em}
 .hero-line2{display:flex;align-items:center;justify-content:center;gap:.4em;flex-wrap:nowrap}
@@ -258,6 +386,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
 .tw-name-text{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(2rem,3.8vw,3.4rem);font-weight:800;letter-spacing:-.05em;color:var(--lime);line-height:1}
 .tw-cursor{display:inline-block;width:3px;height:clamp(1.5rem,3.2vw,2.8rem);background:var(--lime);margin-left:3px;vertical-align:middle;animation:cur-blink .75s step-end infinite;border-radius:2px;flex-shrink:0}
 @keyframes cur-blink{0%,100%{opacity:1}50%{opacity:0}}
+/* outcome sub-line */
 .tw-outcome-row{min-height:2rem;display:flex;align-items:center;justify-content:center;margin-top:.6em}
 .tw-outcome{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(.9rem,1.4vw,1.1rem);color:var(--muted2);font-weight:400;line-height:1.5;text-align:center}
 .tw-outcome strong{color:var(--text);font-weight:600}
@@ -266,24 +395,37 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
 .tw-animate-in{animation:slideUp .3s cubic-bezier(.22,1,.36,1) forwards}
 .tw-animate-out{animation:slideDown .2s ease-in forwards}
 </style>
+
+<!-- SVG LOGOS as hidden defs -->
 <svg style="display:none" id="svg-defs">
+  <!-- Perplexity -->
   <symbol id="logo-perplexity" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2L2 7l2 13 8 2 8-2 2-13L12 2zm0 2.5l6.5 3.3-1.5 9.8L12 19l-5-1.4-1.5-9.8L12 4.5z"/></symbol>
-  <symbol id="logo-chatgpt" viewBox="0 0 24 24"><path fill="currentColor" d="M22.28 9.28a5.76 5.76 0 00-.44-4.72 5.83 5.83 0 00-6.26-2.79A5.77 5.77 0 0011.32 0a5.84 5.84 0 00-5.57 4.05 5.77 5.77 0 00-3.85 2.8 5.84 5.84 0 00.72 6.85 5.76 5.76 0 00.44 4.72 5.83 5.83 0 006.26 2.79A5.77 5.77 0 0012.68 24a5.84 5.84 0 005.58-4.06 5.77 5.77 0 003.84-2.79 5.84 5.84 0 00-.72-6.85l-.1-.02z"/></symbol>
+  <!-- ChatGPT -->
+  <symbol id="logo-chatgpt" viewBox="0 0 24 24"><path fill="currentColor" d="M22.28 9.28a5.76 5.76 0 00-.44-4.72 5.83 5.83 0 00-6.26-2.79A5.77 5.77 0 0011.32 0a5.84 5.84 0 00-5.57 4.05 5.77 5.77 0 00-3.85 2.8 5.84 5.84 0 00.72 6.85 5.76 5.76 0 00.44 4.72 5.83 5.83 0 006.26 2.79A5.77 5.77 0 0012.68 24a5.84 5.84 0 005.58-4.06 5.77 5.77 0 003.84-2.79 5.84 5.84 0 00-.72-6.85l-.1-.02zM12.68 22.5a4.33 4.33 0 01-2.78-1.01l.14-.08 4.62-2.67a.77.77 0 00.38-.66v-6.5l1.95 1.13v5.4a4.34 4.34 0 01-4.31 4.39zm-9.3-3.97a4.33 4.33 0 01-.52-2.91l.14.08 4.62 2.67a.76.76 0 00.76 0l5.64-3.26v2.25l-4.71 2.72a4.34 4.34 0 01-5.93-1.55zM2.46 7.9a4.33 4.33 0 012.25-1.9v5.47a.77.77 0 00.38.66l5.64 3.26-1.95 1.13-4.71-2.72A4.34 4.34 0 012.46 7.9zm15.98 3.72l-5.64-3.26 1.95-1.13 4.71 2.72a4.34 4.34 0 01-.65 7.82v-5.47a.76.76 0 00-.37-.68zm1.94-2.94l-.14-.08-4.62-2.67a.76.76 0 00-.76 0L9.22 9.19V6.94l4.71-2.72a4.34 4.34 0 016.45 4.46zM8.17 12.85l-1.95-1.12V6.27a4.34 4.34 0 017.12-3.33l-.14.08-4.62 2.67a.77.77 0 00-.38.66l-.03 6.5zm1.06-2.28l2.51-1.45 2.51 1.45v2.9l-2.51 1.45-2.51-1.45v-2.9z"/></symbol>
+  <!-- Gemini -->
   <symbol id="logo-gemini" viewBox="0 0 24 24"><path fill="currentColor" d="M12 24A14.304 14.304 0 000 12 14.304 14.304 0 0012 0a14.304 14.304 0 0012 12 14.304 14.304 0 00-12 12"/></symbol>
+  <!-- Claude -->
   <symbol id="logo-claude" viewBox="0 0 24 24"><path fill="currentColor" d="M4.71 16.971 8.957 6H11.1L6.857 16.971H4.71zM12.914 6h2.133l3.943 10.971h-2.182l-.807-2.37h-4.09l-.816 2.37H9.13L12.914 6zm2.537 6.84-1.465-4.42-1.494 4.42h2.959z"/></symbol>
+  <!-- Grok -->
   <symbol id="logo-grok" viewBox="0 0 24 24"><path fill="currentColor" d="M17.67 2L9.5 12.43 13.24 17H17.67L11.54 9.56 20 2H17.67ZM6.33 22L14.5 11.57 10.76 7H6.33L12.46 14.44 4 22H6.33Z"/></symbol>
+  <!-- Copilot -->
   <symbol id="logo-copilot" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5C6.2 1.5 1.5 6.2 1.5 12S6.2 22.5 12 22.5 22.5 17.8 22.5 12 17.8 1.5 12 1.5zm3.75 13.13a3.76 3.76 0 01-7.5 0v-1.88h1.88v1.88a1.88 1.88 0 003.75 0v-5.25H9.75V7.5h4.13a1.88 1.88 0 011.87 1.88v5.25z"/></symbol>
 </svg>
+
 <section class="hero" style="background:var(--white)">
   <div class="hero-bg"></div>
   <div class="grid-bg"></div>
   <div class="hero-pill">The new channel for B2B growth</div>
+
+  <!-- ANIMATED HEADLINE -->
   <div class="hero-headline-wrap">
     <div class="hero-line1">Your buyers are searching</div>
     <div class="hero-line2">
       <span class="hero-line2-on">on</span>
       <span class="tw-platform-wrap">
-        <span class="tw-logo-box" id="tw-logo"><svg><use href="#logo-perplexity"/></svg></span>
+        <span class="tw-logo-box" id="tw-logo">
+          <svg><use href="#logo-perplexity"/></svg>
+        </span>
         <span class="tw-name-wrap">
           <span class="tw-name-text" id="tw-name">Perplexity</span><span class="tw-cursor"></span>
         </span>
@@ -293,11 +435,16 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
       <span class="tw-outcome" id="tw-outcome"><strong>You show up first.</strong> We deliver them as a qualified lead.</span>
     </div>
   </div>
+
   <p class="hero-sub" style="text-align:center">Be the answer AI gives. Stelvai makes your business appear in AI recommendations — and finds the companies searching for you right now, delivered as pre-qualified leads.</p>
+
   <div class="hero-cta">
-    <button class="btn-hero" onclick="openDashboard()">Try Free — No card needed <span>→</span></button>
+    <button class="btn-hero" onclick="openDashboard()">
+      Try Free — No card needed <span>→</span>
+    </button>
     <button class="btn-hero-outline" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">See how it works</button>
   </div>
+
   <div style="display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem">
     <span class="ai-badge">Perplexity</span>
     <span class="ai-badge">ChatGPT</span>
@@ -306,30 +453,97 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
     <span class="ai-badge">Grok</span>
     <span class="ai-badge">Copilot</span>
   </div>
-  <div class="marquee-wrap"><div class="marquee" id="marquee"></div></div>
-</section><script>
+  <div class="marquee-wrap">
+    <div class="marquee" id="marquee"></div>
+  </div>
+</section>
+
+<script>
+/* ── TYPEWRITER ENGINE ── */
 (function(){
   const platforms=[
-    {id:'perplexity',svgId:'logo-perplexity',name:'Perplexity',color:'#20c5d1',bg:'rgba(32,197,209,.12)',outcome:'<strong>You show up first.</strong> We deliver them as a qualified lead.'},
-    {id:'chatgpt',svgId:'logo-chatgpt',name:'ChatGPT',color:'#10a37f',bg:'rgba(16,163,127,.12)',outcome:'<strong>You get recommended.</strong> We find who searched and send them to you.'},
-    {id:'gemini',svgId:'logo-gemini',name:'Gemini',color:'#4c8ef7',bg:'rgba(76,142,247,.12)',outcome:'<strong>You become the answer.</strong> We bring the deal directly to your pipeline.'},
-    {id:'claude',svgId:'logo-claude',name:'Claude',color:'#d4956a',bg:'rgba(212,149,106,.12)',outcome:'<strong>You earn the citation.</strong> We turn that attention into revenue.'},
-    {id:'grok',svgId:'logo-grok',name:'Grok',color:'#e5e5e5',bg:'rgba(229,229,229,.08)',outcome:'<strong>You own the mention.</strong> We qualify and deliver the lead for you.'},
-    {id:'copilot',svgId:'logo-copilot',name:'Copilot',color:'#0078d4',bg:'rgba(0,120,212,.12)',outcome:'<strong>You get found.</strong> We hand you the conversation ready to close.'},
+    {id:'perplexity', svgId:'logo-perplexity', name:'Perplexity', color:'#20c5d1', bg:'rgba(32,197,209,.12)', outcome:'<strong>You show up first.</strong> We deliver them as a qualified lead.'},
+    {id:'chatgpt',    svgId:'logo-chatgpt',    name:'ChatGPT',    color:'#10a37f', bg:'rgba(16,163,127,.12)', outcome:'<strong>You get recommended.</strong> We find who searched and send them to you.'},
+    {id:'gemini',     svgId:'logo-gemini',     name:'Gemini',     color:'#4c8ef7', bg:'rgba(76,142,247,.12)', outcome:'<strong>You become the answer.</strong> We bring the deal directly to your pipeline.'},
+    {id:'claude',     svgId:'logo-claude',     name:'Claude',     color:'#d4956a', bg:'rgba(212,149,106,.12)', outcome:'<strong>You earn the citation.</strong> We turn that attention into revenue.'},
+    {id:'grok',       svgId:'logo-grok',       name:'Grok',       color:'#e5e5e5', bg:'rgba(229,229,229,.08)', outcome:'<strong>You own the mention.</strong> We qualify and deliver the lead for you.'},
+    {id:'copilot',    svgId:'logo-copilot',    name:'Copilot',    color:'#0078d4', bg:'rgba(0,120,212,.12)', outcome:'<strong>You get found.</strong> We hand you the conversation ready to close.'},
   ];
+
   let idx=0;
   const logoBox=document.getElementById('tw-logo');
   const nameEl=document.getElementById('tw-name');
   const outcomeEl=document.getElementById('tw-outcome');
+
   function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
-  async function typeWord(word){nameEl.textContent='';for(let i=0;i<word.length;i++){nameEl.textContent+=word[i];await sleep(48+Math.random()*30);}}
-  async function eraseWord(){while(nameEl.textContent.length>0){nameEl.textContent=nameEl.textContent.slice(0,-1);await sleep(28+Math.random()*18);}}
-  function setLogo(p){logoBox.style.color=p.color;logoBox.style.background=p.bg;logoBox.style.borderColor=p.color.replace(')',',0.25)').replace('rgb','rgba');logoBox.innerHTML='<svg style="width:1.3rem;height:1.3rem"><use href="#'+p.svgId+'"></use></svg>';}
-  async function swapOutcome(html){outcomeEl.classList.remove('tw-animate-in');outcomeEl.classList.add('tw-animate-out');await sleep(220);outcomeEl.innerHTML=html;outcomeEl.classList.remove('tw-animate-out');outcomeEl.classList.add('tw-animate-in');}
-  async function run(){setLogo(platforms[0]);await sleep(2600);while(true){idx=(idx+1)%platforms.length;const p=platforms[idx];await eraseWord();await sleep(150);logoBox.style.transform='scale(0.6)';logoBox.style.opacity='0';setLogo(p);await sleep(50);logoBox.style.transition='all .3s cubic-bezier(.34,1.56,.64,1)';logoBox.style.transform='scale(1)';logoBox.style.opacity='1';swapOutcome(p.outcome);await typeWord(p.name);await sleep(2600);}}
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}else{run();}
+
+  async function typeWord(word){
+    nameEl.textContent='';
+    for(let i=0;i<word.length;i++){
+      nameEl.textContent+=word[i];
+      await sleep(48+Math.random()*30);
+    }
+  }
+
+  async function eraseWord(){
+    while(nameEl.textContent.length>0){
+      nameEl.textContent=nameEl.textContent.slice(0,-1);
+      await sleep(28+Math.random()*18);
+    }
+  }
+
+  function setLogo(p){
+    logoBox.style.color=p.color;
+    logoBox.style.background=p.bg;
+    logoBox.style.borderColor=p.color.replace(')',',0.25)').replace('rgb','rgba');
+    logoBox.innerHTML=`<svg style="width:1.3rem;height:1.3rem"><use href="#${p.svgId}"/></svg>`;
+  }
+
+  async function swapOutcome(html){
+    outcomeEl.classList.remove('tw-animate-in');
+    outcomeEl.classList.add('tw-animate-out');
+    await sleep(220);
+    outcomeEl.innerHTML=html;
+    outcomeEl.classList.remove('tw-animate-out');
+    outcomeEl.classList.add('tw-animate-in');
+  }
+
+  async function run(){
+    setLogo(platforms[0]);
+    await sleep(2600);
+
+    while(true){
+      idx=(idx+1)%platforms.length;
+      const p=platforms[idx];
+
+      await eraseWord();
+      await sleep(150);
+
+      // pop logo in
+      logoBox.style.transform='scale(0.6)';
+      logoBox.style.opacity='0';
+      setLogo(p);
+      await sleep(50);
+      logoBox.style.transition='all .3s cubic-bezier(.34,1.56,.64,1)';
+      logoBox.style.transform='scale(1)';
+      logoBox.style.opacity='1';
+
+      swapOutcome(p.outcome);
+      await typeWord(p.name);
+      await sleep(2600);
+    }
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
 })();
 </script>
+
+
+<!-- LOGOS -->
 <div class="logos-row">
   <span style="font-size:.8rem;color:var(--muted);letter-spacing:.05em">TRUSTED BY TEAMS AT</span>
   <div class="logo-chip">Northlane Co.</div>
@@ -339,6 +553,8 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
   <div class="logo-chip">Velo Commerce</div>
   <div class="logo-chip">Aria Consulting</div>
 </div>
+
+<!-- STATS -->
 <div style="background:var(--white);padding:0 1.5rem">
   <div class="stats-row">
     <div class="stat-box"><div class="stat-num">73%</div><div class="stat-label">of B2B buyers now use AI for vendor discovery before Google</div></div>
@@ -346,6 +562,8 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
     <div class="stat-box"><div class="stat-num">93%</div><div class="stat-label">gross margin — built on lean AI infrastructure, not headcount</div></div>
   </div>
 </div>
+
+<!-- FEATURES BENTO -->
 <div style="background:var(--snow)">
 <section class="section" id="features">
   <div class="section-eyebrow">The Platform</div>
@@ -358,7 +576,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
       <p>Store your business facts, products, ICP, and messaging once. Every AI interaction draws from this — so the AI always knows who you are and recommends you accurately.</p>
       <div class="bento-mock">
         <div class="row"><span>Company Overview</span><span class="score-chip score-high">✓ Trained</span></div>
-        <div class="row"><span>Product &amp; Service Library</span><span class="score-chip score-high">✓ 12 pages</span></div>
+        <div class="row"><span>Product & Service Library</span><span class="score-chip score-high">✓ 12 pages</span></div>
         <div class="row"><span>Buyer Profiles</span><span class="score-chip score-high">✓ 3 ICPs</span></div>
         <div class="row"><span>Competitor Differentiators</span><span class="score-chip score-mid">⚠ Incomplete</span></div>
       </div>
@@ -366,10 +584,10 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
     <div class="bento-card">
       <span class="bento-icon">📡</span>
       <h3 class="display">AI Feed Generator</h3>
-      <p>Creates a <strong>yourdomain.com/ai-feed</strong> page — a structured, machine-readable file that AI bots crawl to understand and cite your business.</p>
+      <p>Creates a <strong style="color:var(--text)">yourdomain.com/ai-feed</strong> page — a structured, machine-readable file that AI bots crawl to understand and cite your business. Like an XML sitemap, but for AI.</p>
       <div class="bento-mock" style="font-family:monospace;font-size:.72rem;color:var(--muted2)">
         <div style="color:var(--lime)">&lt;ai-feed&gt;</div>
-        <div style="padding-left:.75rem">&lt;business&gt;Acme SaaS Co.&lt;/business&gt;</div>
+        <div style="padding-left:.75rem;color:var(--muted2)">&lt;business&gt;Acme SaaS Co.&lt;/business&gt;</div>
         <div style="padding-left:.75rem">&lt;category&gt;CRM Software&lt;/category&gt;</div>
         <div style="padding-left:.75rem;color:var(--lime)">&lt;authority-score&gt;87&lt;/authority-score&gt;</div>
         <div style="color:var(--lime)">&lt;/ai-feed&gt;</div>
@@ -378,7 +596,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
     <div class="bento-card featured">
       <span class="bento-icon">⚡</span>
       <h3 class="display">Outbound Lead Finder <span class="new-tag">NEW</span></h3>
-      <p>Our agent monitors Perplexity, Reddit, and LinkedIn for companies actively searching for your exact services. Each lead is scored against your ICP and delivered with full context.</p>
+      <p>Our agent monitors Perplexity, Reddit, and LinkedIn for companies actively searching for your exact services. Each lead is scored against your ICP and delivered with full context + outreach hook.</p>
       <div class="bento-mock">
         <div class="row"><span style="font-weight:600">Northlane Marketing</span><span class="score-chip score-high">94% ICP match</span></div>
         <div class="row" style="font-size:.72rem;color:var(--muted)"><span>Query: "best CRM for marketing agency"</span></div>
@@ -389,32 +607,46 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
     <div class="bento-card">
       <span class="bento-icon">📊</span>
       <h3 class="display">Leads Dashboard</h3>
-      <p>See every visitor arriving from AI chatbot referrals. Auto-filtered for spam. Get alerted when a high-intent lead lands on your site.</p>
+      <p>See every visitor arriving from AI chatbot referrals. Auto-filtered for spam. Get alerted when a high-intent lead lands on your site — with their journey mapped from AI query to conversion.</p>
       <div class="bento-mock">
         <div class="row"><span>AI-referred visitors this week</span><span style="color:var(--lime);font-weight:700">+248</span></div>
-        <div class="row"><span>Avg. pages per AI visitor</span><span>4.7</span></div>
+        <div class="row"><span>Avg. pages per AI visitor</span><span style="color:var(--text)">4.7</span></div>
         <div class="row"><span>Conversion rate vs direct</span><span style="color:var(--lime);font-weight:700">+312%</span></div>
       </div>
     </div>
   </div>
 </section>
-</div>
+</div><!-- /features bg -->
+
+<!-- HOW IT WORKS -->
 <div style="background:var(--white)">
 <section class="section" id="how" style="border-top:1px solid var(--border)">
   <div class="section-eyebrow">The Process</div>
   <div class="section-title display">Set up in 10 minutes.<br>Compound forever.</div>
   <div class="steps">
-    <div class="step"><div class="step-num">01</div><h3 class="display">Build Brand Memory</h3><p>Enter your business details, products, buyers, and differentiators. Our AI structures this into a machine-readable context layer.</p></div>
-    <div class="step"><div class="step-num">02</div><h3 class="display">Deploy Your AI Feed</h3><p>We generate your /ai-feed page and submit it to all major AI search indices. AI models start picking up your brand over the following weeks.</p></div>
-    <div class="step"><div class="step-num">03</div><h3 class="display">Receive Qualified Leads</h3><p>The Lead Finder agent runs daily. Pre-qualified, ICP-matched leads arrive in your dashboard with research and outreach hooks.</p></div>
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3 class="display">Build Brand Memory</h3>
+      <p>Enter your business details, products, buyers, and differentiators. Our AI structures this into a machine-readable context layer.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3 class="display">Deploy Your AI Feed</h3>
+      <p>We generate your /ai-feed page and submit it to all major AI search indices. AI models start picking up your brand over the following weeks as they crawl and refresh their sources.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3 class="display">Receive Qualified Leads</h3>
+      <p>The Lead Finder agent runs daily. Pre-qualified, ICP-matched leads arrive in your dashboard with research and outreach hooks.</p>
+    </div>
   </div>
 </section>
-</div>
+</div><!-- /how bg -->
 <div style="background:var(--snow)">
 <section class="section" id="pricing" style="border-top:1px solid var(--border)">
   <div class="section-eyebrow">Pricing</div>
   <div class="section-title display">One price.<br>Everything included.</div>
-  <p class="section-sub">No seat fees. No usage caps. Cancel anytime.</p>
+  <p class="section-sub">No seat fees. No usage caps. Cancel anytime. Add-on Lead Finder to any plan.</p>
   <div class="pricing-grid">
     <div class="plan">
       <div class="plan-name">Starter</div>
@@ -426,7 +658,9 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
         <li>AI Feed page generation</li>
         <li>Monthly AI audit (3 platforms)</li>
         <li>Basic leads dashboard</li>
+        <li>Schema markup generator</li>
         <li class="dim">Outbound Lead Finder</li>
+        <li class="dim">Competitor gap analysis</li>
       </ul>
       <button class="plan-cta" onclick="openDashboard()">Get started free</button>
     </div>
@@ -440,8 +674,10 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
         <li>Brand Memory (unlimited pages)</li>
         <li>AI Feed + weekly refresh</li>
         <li>Weekly audits across 6 AI platforms</li>
+        <li>Full leads dashboard + alerts</li>
         <li>20 outbound leads/mo via Lead Finder</li>
         <li>Competitor gap analysis</li>
+        <li>Content recommendations</li>
       </ul>
       <button class="plan-cta" onclick="openDashboard()">Start 14-day free trial</button>
     </div>
@@ -452,29 +688,35 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
       <div class="plan-divider"></div>
       <ul class="plan-feats">
         <li>Everything in Growth</li>
+        <li>Daily monitoring & real-time alerts</li>
         <li>50 outbound leads/mo</li>
         <li>5 brand profiles / locations</li>
-        <li>White-label reports</li>
+        <li>Done-for-you content generation</li>
         <li>API access for your stack</li>
+        <li>White-label reports</li>
       </ul>
       <button class="plan-cta" onclick="openDashboard()">Start 14-day free trial</button>
     </div>
   </div>
 </section>
-</div>
+</div><!-- /pricing bg -->
+
+<!-- FAQ -->
 <div style="background:var(--white)">
 <section class="section" style="border-top:1px solid var(--border)">
   <div class="section-eyebrow">FAQ</div>
   <div class="section-title display">Common questions</div>
   <div class="faq" id="faq">
-    <div class="faq-item"><button class="faq-q">How is this different from traditional SEO tools?<span class="chevron">+</span></button><div class="faq-a"><p>Traditional SEO tools focus entirely on passive inbound. Stelvai does that AND adds an active outbound layer: our Lead Finder agent finds companies currently searching for you on AI platforms right now.</p></div></div>
-    <div class="faq-item"><button class="faq-q">How does the AI Feed work exactly?<span class="chevron">+</span></button><div class="faq-a"><p>We generate a structured /ai-feed page on your domain that AI crawlers like Perplexity and Bing AI ingest when building their knowledge bases. It's like schema markup but purpose-built for LLM consumption.</p></div></div>
-    <div class="faq-item"><button class="faq-q">Where do the leads come from exactly?<span class="chevron">+</span></button><div class="faq-a"><p>Our agent monitors Perplexity's real-time search index, intent signals on Reddit and LinkedIn, and related forums for searches matching your service category.</p></div></div>
-    <div class="faq-item"><button class="faq-q">How fast will I see results?<span class="chevron">+</span></button><div class="faq-a"><p>AI Feed indexing typically begins within 2–4 weeks. Lead Finder runs daily from day one — most customers see their first leads within 1–2 weeks of setup.</p></div></div>
-    <div class="faq-item"><button class="faq-q">Can I white-label this for my agency clients?<span class="chevron">+</span></button><div class="faq-a"><p>Yes — the Scale plan includes white-label reports. For fully white-labeled agency reseller access, contact us.</p></div></div>
+    <div class="faq-item"><button class="faq-q">How is this different from traditional SEO tools?<span class="chevron">+</span></button><div class="faq-a"><p>Traditional SEO tools focus entirely on passive inbound — optimize your site and wait. Stelvai does that AND adds an active outbound layer: our Lead Finder agent finds companies currently searching for you on AI platforms right now and delivers them as pre-qualified leads. No other tool does this.</p></div></div>
+    <div class="faq-item"><button class="faq-q">How does the AI Feed work exactly?<span class="chevron">+</span></button><div class="faq-a"><p>We generate a structured /ai-feed page on your domain (or hosted by us) that AI crawlers like Perplexity, Bing AI, and others ingest when building their knowledge bases. It's like schema markup but purpose-built for LLM consumption — covering your products, customers, use cases, and authoritative claims.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Where do the leads come from exactly?<span class="chevron">+</span></button><div class="faq-a"><p>Our agent monitors Perplexity's real-time search index, intent signals on Reddit and LinkedIn, and related forums for searches matching your service category. It cross-references with company databases to identify the searching business, then Claude scores each lead against your ICP before you ever see it.</p></div></div>
+    <div class="faq-item"><button class="faq-q">How fast will I see results?<span class="chevron">+</span></button><div class="faq-a"><p>AI Feed indexing typically begins within 2–4 weeks on major platforms as AI search engines crawl and process new content. Lead Finder runs daily from day one — most customers see their first leads within 1–2 weeks of setup. AI mention rate improvements are generally measurable within 4–8 weeks as AI platforms refresh their indices. Consistent, significant visibility gains build over 2–3 months.</p></div></div>
+    <div class="faq-item"><button class="faq-q">Can I white-label this for my agency clients?<span class="chevron">+</span></button><div class="faq-a"><p>Yes — the Scale plan includes white-label reports. For fully white-labeled agency reseller access (your branding, your pricing), contact us. We offer agency partnerships at a discounted wholesale rate.</p></div></div>
   </div>
 </section>
-</div>
+</div><!-- /faq bg -->
+
+<!-- CTA BAND -->
 <div style="background:var(--snow)">
 <div class="cta-band">
   <div class="cta-inner">
@@ -482,12 +724,13 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
     <h2 class="display">Your competitors are being<br>recommended. You should be too.</h2>
     <p>Free for 14 days. No credit card. Setup takes under 10 minutes.</p>
     <div class="cta-email">
-      <input type="email" placeholder="name@company.com">
+      <input type="email" placeholder="name@company.com" id="cta-email-input">
       <button class="btn-lime" onclick="openDashboard()">Get started →</button>
     </div>
   </div>
 </div>
-</div>
+</div><!-- /cta bg -->
+
 <footer>
   <div class="footer-logo" style="display:flex;align-items:center;gap:10px">
     <svg width="22" height="22" viewBox="0 0 44 44" fill="none">
@@ -500,14 +743,22 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
     Stel<span style="color:#00c875">vai</span>
   </div>
   <div class="footer-links">
-    <a href="#">Features</a><a href="#">Pricing</a><a href="#">Privacy</a><a href="#">Terms</a>
+    <a href="#">Features</a><a href="#">Pricing</a><a href="#">Blog</a><a href="#">Privacy</a><a href="#">Terms</a>
   </div>
-  <div style="color:var(--muted)">&copy; 2026 Stelvai Inc.</div>
+  <div style="color:var(--muted)">© 2026 Stelvai Inc.</div>
 </footer>
-</div><div id="view-dashboard">
+
+</div><!-- end landing -->
+
+<!-- ═══════════════════════════════════
+     DASHBOARD
+═══════════════════════════════════ -->
+<div id="view-dashboard">
 <div class="db-wrap">
+
+  <!-- SIDEBAR -->
   <aside class="db-sidebar">
-    <div class="db-sidebar-logo">
+    <div class="db-sidebar-logo" style="display:flex;align-items:center;gap:8px">
       <svg width="22" height="22" viewBox="0 0 44 44" fill="none">
         <path d="M14 28 C14 24, 18 22, 22 22 C26 22, 30 20, 30 16" stroke="#00c875" stroke-width="2.5" fill="none" stroke-linecap="round"/>
         <circle cx="22" cy="22" r="3.5" fill="#00c875"/>
@@ -519,24 +770,45 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
     </div>
     <nav class="db-nav">
       <div class="db-nav-section">Workspace</div>
-      <div class="db-nav-item active" data-panel="overview" onclick="switchPanel(this,'overview')"><span class="icon">⬡</span> Overview</div>
-      <div class="db-nav-item" data-panel="brand" onclick="switchPanel(this,'brand')"><span class="icon">🧠</span> Brand Memory</div>
-      <div class="db-nav-item" data-panel="feed" onclick="switchPanel(this,'feed')"><span class="icon">📡</span> AI Feed</div>
-      <div class="db-nav-item" data-panel="leads" onclick="switchPanel(this,'leads')"><span class="icon">⚡</span> Lead Finder</div>
-      <div class="db-nav-item" data-panel="dashboard" onclick="switchPanel(this,'dashboard')"><span class="icon">📊</span> Leads Dashboard</div>
-      <div class="db-nav-item" data-panel="audit" onclick="switchPanel(this,'audit')"><span class="icon">🔍</span> Live AI Audit <span style="font-size:.6rem;background:var(--lime);color:var(--ink);padding:.1rem .4rem;border-radius:4px;font-weight:700;margin-left:.3rem">LIVE</span></div>
+      <div class="db-nav-item active" data-panel="overview" onclick="switchPanel(this,'overview')">
+        <span class="icon">⬡</span> Overview
+      </div>
+      <div class="db-nav-item" data-panel="brand" onclick="switchPanel(this,'brand')">
+        <span class="icon">🧠</span> Brand Memory
+      </div>
+      <div class="db-nav-item" data-panel="feed" onclick="switchPanel(this,'feed')">
+        <span class="icon">📡</span> AI Feed
+      </div>
+      <div class="db-nav-item" data-panel="leads" onclick="switchPanel(this,'leads')">
+        <span class="icon">⚡</span> Lead Finder
+      </div>
+      <div class="db-nav-item" data-panel="dashboard" onclick="switchPanel(this,'dashboard')">
+        <span class="icon">📊</span> Leads Dashboard
+      </div>
+      <div class="db-nav-item" data-panel="audit" onclick="switchPanel(this,'audit')">
+        <span class="icon">🔍</span> Live AI Audit <span style="font-size:.6rem;background:var(--lime);color:var(--ink);padding:.1rem .4rem;border-radius:4px;font-weight:700;margin-left:.3rem">LIVE</span>
+      </div>
       <div class="db-nav-section">Account</div>
-      <div class="db-nav-item" onclick="document.getElementById('key-modal').style.display='flex'"><span class="icon">⚙</span> Settings</div>
+      <div class="db-nav-item" onclick="document.getElementById('key-modal').style.display='flex'">
+        <span class="icon">⚙</span> Settings
+      </div>
+      <div class="db-nav-item" onclick="showToast('Upgraded!','You are on the Growth plan.')">
+        <span class="icon">↑</span> Upgrade Plan
+      </div>
     </nav>
     <div class="db-sidebar-bottom">
-      <div class="db-user" style="display:flex;align-items:center;gap:.75rem">
-        <div class="db-avatar" style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--lime),var(--sky));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--ink)">JD</div>
-        <div style="font-size:.78rem;color:var(--muted2);line-height:1.4"><div style="color:var(--text);font-weight:600;font-size:.82rem">Jane Doe</div>Growth Plan</div>
+      <div class="db-user">
+        <div class="db-avatar">JD</div>
+        <div class="db-user-info"><div class="db-user-name">Jane Doe</div>Growth Plan</div>
       </div>
-      <div id="key-status-text" onclick="document.getElementById('key-modal').style.display='flex'" style="margin-top:.75rem;font-size:.72rem;color:var(--muted);cursor:pointer;padding:.4rem .6rem;background:var(--white);border:1px solid var(--border);border-radius:7px;text-align:center">○  No API key — click to add</div>
+      <div id="key-status-text" onclick="document.getElementById('key-modal').style.display='flex'" style="margin-top:.75rem;font-size:.72rem;color:var(--muted);cursor:pointer;padding:.4rem .6rem;background:var(--white);border:1px solid var(--border);border-radius:7px;text-align:center;transition:border-color .2s" onmouseover="this.style.borderColor='var(--lime)'" onmouseout="this.style.borderColor='var(--border)'">○  No API key — click to add</div>
     </div>
   </aside>
+
+  <!-- MAIN -->
   <main class="db-main">
+
+    <!-- OVERVIEW PANEL -->
     <div class="db-panel active" id="panel-overview">
       <div class="db-topbar">
         <h1 class="display">Overview</h1>
@@ -552,13 +824,34 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
         <div class="kpi"><div class="kpi-label">AI Feed Health</div><div class="kpi-val" style="color:var(--lime)">Live</div><div class="kpi-change" style="color:var(--muted2)">Last crawled 2h ago</div></div>
       </div>
       <div class="db-grid2">
-        <div class="db-card"><div class="db-card-title">AI Mention Rate by Platform</div><div id="mention-bars"></div></div>
-        <div class="db-card"><div class="db-card-title">Latest Qualified Leads</div><div id="overview-leads"></div></div>
+        <div class="db-card">
+          <div class="db-card-title">
+            AI Mention Rate by Platform
+            <span class="view-all" onclick="switchPanel(document.querySelector('[data-panel=dashboard]'),'dashboard')">View details →</span>
+          </div>
+          <div id="mention-bars"></div>
+        </div>
+        <div class="db-card">
+          <div class="db-card-title">
+            Latest Qualified Leads
+            <span class="view-all" onclick="switchPanel(document.querySelector('[data-panel=leads]'),'leads')">Find more →</span>
+          </div>
+          <div id="overview-leads"></div>
+        </div>
       </div>
-      <div class="db-card" style="margin-top:1rem"><div class="db-card-title">Setup Checklist</div><div id="checklist"></div></div>
+      <div class="db-card" style="margin-top:1rem">
+        <div class="db-card-title">Setup Checklist</div>
+        <div id="checklist"></div>
+      </div>
     </div>
+
+    <!-- BRAND MEMORY PANEL -->
     <div class="db-panel" id="panel-brand">
-      <div class="db-topbar"><h1 class="display">Brand Memory</h1><div class="db-topbar-right"><div class="db-badge">12 of ∞ pages</div></div></div>
+      <div class="db-topbar">
+        <h1 class="display">Brand Memory</h1>
+        <div class="db-topbar-right"><div class="db-badge">12 of ∞ pages</div></div>
+      </div>
+      <p style="font-size:.85rem;color:var(--muted2);margin-bottom:1.5rem">This is the single source of truth AI models use to understand and recommend your business. Keep it accurate and complete.</p>
       <div class="bm-tabs">
         <button class="bm-tab active" onclick="switchBMTab(this,'bm-core')">Core Info</button>
         <button class="bm-tab" onclick="switchBMTab(this,'bm-products')">Products</button>
@@ -567,23 +860,25 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
       </div>
       <div id="bm-core" class="bm-pane">
         <div class="bm-grid">
-          <div class="bm-section"><h3>Company Identity</h3>
+          <div class="bm-section">
+            <h3>Company Identity</h3>
             <div class="bm-field"><label>Business Name</label><input class="bm-input" type="text" placeholder="e.g. Acme SaaS Co." id="bm-name"></div>
             <div class="bm-field"><label>Website</label><input class="bm-input" type="text" placeholder="acmesaas.com" id="bm-url"></div>
             <div class="bm-field"><label>Industry / Category</label><input class="bm-input" type="text" placeholder="e.g. CRM Software for Marketing Agencies" id="bm-category"></div>
-            <div class="bm-field"><label>One-line Description</label><input class="bm-input" type="text" placeholder="The CRM built for agencies" id="bm-tagline"></div>
+            <div class="bm-field"><label>One-line Description</label><input class="bm-input" type="text" placeholder="e.g. The CRM built for agencies managing 10+ clients" id="bm-tagline"></div>
           </div>
-          <div class="bm-section"><h3>Authority Signals</h3>
-            <div class="bm-field"><label>Founded / Years in Business</label><input class="bm-input" type="text" id="bm-founded"></div>
-            <div class="bm-field"><label>Key Customers / Social Proof</label><textarea class="bm-input bm-textarea" id="bm-proof"></textarea></div>
-            <div class="bm-field"><label>Awards / Recognition</label><textarea class="bm-input bm-textarea" id="bm-awards"></textarea></div>
+          <div class="bm-section">
+            <h3>Authority Signals</h3>
+            <div class="bm-field"><label>Founded / Years in Business</label><input class="bm-input" type="text" placeholder="e.g. Founded 2019 — 7 years" id="bm-founded"></div>
+            <div class="bm-field"><label>Key Customers / Social Proof</label><textarea class="bm-input bm-textarea" placeholder="e.g. Trusted by 500+ agencies including Northlane, Apex, BlueSky..." id="bm-proof"></textarea></div>
+            <div class="bm-field"><label>Awards / Recognition</label><textarea class="bm-input bm-textarea" placeholder="e.g. G2 Leader 2025, Capterra Top 20..." id="bm-awards"></textarea></div>
           </div>
           <div class="bm-section" style="grid-column:span 2">
             <h3>Keywords AI Should Associate With You</h3>
-            <div class="bm-field"><label>Target Search Queries</label><textarea class="bm-input bm-textarea" id="bm-keywords" style="min-height:60px"></textarea></div>
+            <div class="bm-field"><label>Target Search Queries</label><textarea class="bm-input bm-textarea" placeholder="e.g. best CRM for marketing agencies, agency project management software..." id="bm-keywords" style="min-height:60px"></textarea></div>
             <div class="bm-tag-list" id="bm-tag-display"></div>
             <div class="bm-save-row">
-              <button class="btn-ghost" onclick="runBMAnalysis()">✶ AI Analyze &amp; Suggest</button>
+              <button class="btn-ghost" onclick="runBMAnalysis()">✦ AI Analyze & Suggest</button>
               <button class="bm-save" onclick="saveBrandMemory()">Save Brand Memory</button>
             </div>
             <div id="bm-ai-output"></div>
@@ -591,147 +886,952 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
         </div>
       </div>
       <div id="bm-products" class="bm-pane" style="display:none">
-        <div class="bm-grid"><div class="bm-section" style="grid-column:span 2">
-          <h3>Product &amp; Service Library</h3>
-          <textarea class="bm-input bm-textarea" id="bm-products-text" style="min-height:200px"></textarea>
-          <div class="bm-save-row"><button class="bm-save" onclick="showToast('Saved ✓','Product library updated.')">Save Products</button></div>
-        </div></div>
+        <div class="bm-grid">
+          <div class="bm-section" style="grid-column:span 2">
+            <h3>Product & Service Library</h3>
+            <p style="font-size:.82rem;color:var(--muted2);margin-bottom:1rem">List your core offerings. The more detail here, the more accurately AI recommends you for specific use cases.</p>
+            <textarea class="bm-input bm-textarea" id="bm-products-text" style="min-height:200px" placeholder="Product 1: [Name] — [What it does] — [Who it's for] — [Price range]&#10;Product 2: ...&#10;Service 1: ..."></textarea>
+            <div class="bm-save-row"><button class="bm-save" onclick="showToast('Saved ✓','Product library updated.')">Save Products</button></div>
+          </div>
+        </div>
       </div>
       <div id="bm-buyers" class="bm-pane" style="display:none">
         <div class="bm-grid">
-          <div class="bm-section"><h3>Primary ICP</h3>
-            <div class="bm-field"><label>Job Titles</label><input class="bm-input" type="text"></div>
-            <div class="bm-field"><label>Company Size</label><input class="bm-input" type="text"></div>
-            <div class="bm-field"><label>Industries</label><input class="bm-input" type="text"></div>
-            <div class="bm-field"><label>Pain Points</label><textarea class="bm-input bm-textarea"></textarea></div>
+          <div class="bm-section">
+            <h3>Primary ICP</h3>
+            <div class="bm-field"><label>Job Titles</label><input class="bm-input" type="text" placeholder="e.g. VP Marketing, Head of Growth, CMO"></div>
+            <div class="bm-field"><label>Company Size</label><input class="bm-input" type="text" placeholder="e.g. 10-200 employees, Series A-C"></div>
+            <div class="bm-field"><label>Industries</label><input class="bm-input" type="text" placeholder="e.g. B2B SaaS, Marketing Agencies"></div>
+            <div class="bm-field"><label>Pain Points</label><textarea class="bm-input bm-textarea" placeholder="e.g. Outgrowing spreadsheets, need better reporting..."></textarea></div>
           </div>
-          <div class="bm-section"><h3>Buying Triggers</h3>
-            <div class="bm-field"><label>When Do They Buy?</label><textarea class="bm-input bm-textarea"></textarea></div>
-            <div class="bm-field"><label>Common Objections</label><textarea class="bm-input bm-textarea"></textarea></div>
-            <div class="bm-save-row"><button class="bm-save" onclick="showToast('Saved ✓','ICP updated.')">Save ICP</button></div>
+          <div class="bm-section">
+            <h3>Buying Triggers</h3>
+            <div class="bm-field"><label>When Do They Buy?</label><textarea class="bm-input bm-textarea" placeholder="e.g. Just raised funding, hired first sales person, team > 10 people..."></textarea></div>
+            <div class="bm-field"><label>Common Objections</label><textarea class="bm-input bm-textarea" placeholder="e.g. Price, implementation time, integration with existing tools..."></textarea></div>
+            <div class="bm-save-row" style="margin-top:.5rem"><button class="bm-save" onclick="showToast('Saved ✓','Buyer profiles updated. Lead Finder will use these.')">Save ICP</button></div>
           </div>
         </div>
       </div>
       <div id="bm-competitors" class="bm-pane" style="display:none">
-        <div class="bm-grid"><div class="bm-section" style="grid-column:span 2">
-          <h3>Competitive Positioning</h3>
-          <div class="bm-field"><label>Main Competitors</label><input class="bm-input" type="text"></div>
-          <div class="bm-field"><label>Why customers choose you</label><textarea class="bm-input bm-textarea" style="min-height:100px"></textarea></div>
-          <div class="bm-save-row"><button class="bm-save" onclick="showToast('Saved ✓','Competitive context saved.')">Save Positioning</button></div>
-        </div></div>
+        <div class="bm-grid">
+          <div class="bm-section" style="grid-column:span 2">
+            <h3>Competitive Positioning</h3>
+            <p style="font-size:.82rem;color:var(--muted2);margin-bottom:1rem">AI models use competitor context to understand where you fit. Help them distinguish you.</p>
+            <div class="bm-field"><label>Main Competitors</label><input class="bm-input" type="text" placeholder="e.g. HubSpot, Salesforce, Pipedrive"></div>
+            <div class="bm-field"><label>Why customers choose you over competitors</label><textarea class="bm-input bm-textarea" style="min-height:100px" placeholder="e.g. Unlike HubSpot, we're built for agencies. Simpler, half the price, white-label reporting..."></textarea></div>
+            <div class="bm-field"><label>What you're NOT good for (be honest — AI rewards accuracy)</label><textarea class="bm-input bm-textarea" placeholder="e.g. Not ideal for solo freelancers or enterprise with 1000+ contacts..."></textarea></div>
+            <div class="bm-save-row"><button class="bm-save" onclick="showToast('Saved ✓','Competitive context saved.')">Save Positioning</button></div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- AI FEED PANEL -->
     <div class="db-panel" id="panel-feed">
-      <div class="db-topbar"><h1 class="display">AI Feed</h1>
+      <div class="db-topbar">
+        <h1 class="display">AI Feed</h1>
         <div class="db-topbar-right">
-          <div class="feed-url" style="font-size:.82rem;color:var(--muted2);background:var(--white);border:1px solid var(--border);padding:.4rem .85rem;border-radius:8px;display:flex;align-items:center;gap:.5rem"><span style="color:var(--lime)">🔒</span>yourdomain.com/ai-feed</div>
+          <div class="feed-url"><span class="lock">🔒</span>yourdomain.com/ai-feed</div>
           <div class="db-badge" style="background:rgba(0,200,117,.1);color:var(--lime)">● LIVE</div>
         </div>
       </div>
+      <p style="font-size:.85rem;color:var(--muted2);margin-bottom:1.5rem">Your AI Feed is a structured page that AI crawlers read to understand your business. Think of it as an XML sitemap — but for LLMs. It's currently live and being indexed.</p>
       <div class="feed-sections">
         <div class="feed-section">
           <div class="feed-section-header"><h3>Generated Pages</h3><span class="feed-status feed-live">● Live — 8 pages</span></div>
-          <div class="feed-page-item"><div><div style="font-size:.82rem;font-weight:500">Business Overview</div><div style="font-size:.72rem;color:var(--muted)">/ai-feed/overview</div></div><button class="feed-gen-btn" onclick="showToast('Regenerating...','Page will refresh in ~30 seconds.')">&#8635; Refresh</button></div>
-          <div class="feed-page-item"><div><div style="font-size:.82rem;font-weight:500">Products &amp; Services</div><div style="font-size:.72rem;color:var(--muted)">/ai-feed/products</div></div><button class="feed-gen-btn" onclick="showToast('Regenerating...','')">&#8635; Refresh</button></div>
-          <div class="feed-page-item"><div><div style="font-size:.82rem;font-weight:500">FAQ for AI Queries</div><div style="font-size:.72rem;color:var(--muted)">/ai-feed/faq</div></div><button class="feed-gen-btn" onclick="showToast('Regenerating...','')">&#8635; Refresh</button></div>
-          <button class="feed-full-btn" onclick="generateAIFeedPage()">+ Generate New Feed Page with AI</button>
+          <div class="feed-page-item">
+            <div><div class="feed-page-title">Business Overview</div><div class="feed-page-url">/ai-feed/overview</div></div>
+            <button class="feed-gen-btn" onclick="showToast('Regenerating...','Page will refresh in ~30 seconds.')">↻ Refresh</button>
+          </div>
+          <div class="feed-page-item">
+            <div><div class="feed-page-title">Products & Services</div><div class="feed-page-url">/ai-feed/products</div></div>
+            <button class="feed-gen-btn" onclick="showToast('Regenerating...','Page will refresh in ~30 seconds.')">↻ Refresh</button>
+          </div>
+          <div class="feed-page-item">
+            <div><div class="feed-page-title">Customer Use Cases</div><div class="feed-page-url">/ai-feed/use-cases</div></div>
+            <button class="feed-gen-btn" onclick="showToast('Regenerating...','Page will refresh in ~30 seconds.')">↻ Refresh</button>
+          </div>
+          <div class="feed-page-item">
+            <div><div class="feed-page-title">FAQ for AI Queries</div><div class="feed-page-url">/ai-feed/faq</div></div>
+            <button class="feed-gen-btn" onclick="showToast('Regenerating...','Page will refresh in ~30 seconds.')">↻ Refresh</button>
+          </div>
+          <div class="feed-page-item">
+            <div><div class="feed-page-title">Competitive Comparison</div><div class="feed-page-url">/ai-feed/vs</div></div>
+            <button class="feed-gen-btn" onclick="showToast('Regenerating...','Page will refresh in ~30 seconds.')">↻ Refresh</button>
+          </div>
+          <button class="feed-full-btn" onclick="generateFeedPage()">+ Generate New Feed Page with AI</button>
         </div>
         <div class="feed-section">
-          <div class="feed-section-header"><h3>Feed Preview</h3><span class="feed-status feed-live">JSON-LD</span></div>
+          <div class="feed-section-header"><h3>Feed Preview</h3><span class="feed-status feed-live">JSON-LD + HTML</span></div>
           <div class="feed-preview" id="feed-preview-box"></div>
           <div class="feed-section-header" style="margin-top:1.25rem"><h3>Indexing Status</h3></div>
           <div id="feed-indexing"></div>
-          <button class="feed-full-btn" style="margin-top:1rem" onclick="showToast('Submitted ✓','Re-submitted to all AI search indices.')">&#8593; Re-submit to AI Indices</button>
+          <button class="feed-full-btn" style="margin-top:1rem" onclick="showToast('Submitted ✓','Feed re-submitted to all AI search indices.')">↑ Re-submit to AI Indices</button>
         </div>
       </div>
     </div>
+
+    <!-- LEAD FINDER PANEL -->
     <div class="db-panel" id="panel-leads">
-      <div class="db-topbar"><h1 class="display">Lead Finder</h1><div class="db-topbar-right"><div class="db-badge">20 leads/mo remaining: 16</div></div></div>
+      <div class="db-topbar">
+        <h1 class="display">Lead Finder</h1>
+        <div class="db-topbar-right"><div class="db-badge">20 leads/mo remaining: 16</div></div>
+      </div>
+      <p style="font-size:.85rem;color:var(--muted2);margin-bottom:1.5rem">Our agent scans Perplexity, Reddit, LinkedIn, and forums for companies actively searching for your service. Each lead is scored against your saved ICP before appearing here.</p>
       <div class="leads-toolbar">
         <input class="leads-search" type="text" placeholder="Filter by company, query, or platform..." id="lead-filter">
-        <select class="leads-filter"><option>All platforms</option><option>Perplexity AI</option><option>Reddit</option><option>LinkedIn</option></select>
-        <button class="leads-run-btn" id="find-leads-btn" onclick="runLeadFinder()">⚡ Find New Leads</button>
+        <select class="leads-filter" id="lead-score-filter">
+          <option value="">All scores</option>
+          <option value="80">80%+ match</option>
+          <option value="60">60%+ match</option>
+        </select>
+        <select class="leads-filter">
+          <option>All platforms</option>
+          <option>Perplexity AI</option>
+          <option>Reddit</option>
+          <option>LinkedIn</option>
+        </select>
+        <button class="leads-run-btn" id="find-leads-btn" onclick="runLeadFinder()">
+          ⚡ Find New Leads
+        </button>
       </div>
       <div id="leads-loading" style="display:none;padding:2rem;text-align:center">
         <div class="mini-spinner" style="width:28px;height:28px;margin:0 auto 1rem;border-width:3px"></div>
         <div style="font-size:.85rem;color:var(--muted2)" id="leads-loading-text">Scanning AI search platforms...</div>
       </div>
-      <div style="overflow-x:auto"><table class="leads-table" id="leads-table"><thead><tr><th>Company</th><th>Search Query Detected</th><th>ICP Score</th><th>Outreach Hook</th><th>Actions</th></tr></thead><tbody id="leads-tbody"></tbody></table></div>
+      <div style="overflow-x:auto">
+        <table class="leads-table" id="leads-table">
+          <thead><tr>
+            <th>Company</th><th>Search Query Detected</th><th>ICP Score</th><th>Outreach Hook</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="leads-tbody"></tbody>
+        </table>
+      </div>
     </div>
+
+    <!-- LEADS DASHBOARD PANEL -->
     <div class="db-panel" id="panel-dashboard">
-      <div class="db-topbar"><h1 class="display">Leads Dashboard</h1></div>
-      <div class="kpi-grid">
+      <div class="db-topbar">
+        <h1 class="display">Leads Dashboard</h1>
+        <div class="db-topbar-right"><select class="leads-filter">
+          <option>Last 7 days</option><option>Last 30 days</option><option>All time</option>
+        </select></div>
+      </div>
+      <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
         <div class="kpi"><div class="kpi-label">AI-Referred Visits</div><div class="kpi-val">248</div><div class="kpi-change kpi-up">↑ +31%</div></div>
         <div class="kpi"><div class="kpi-label">Avg. Pages / Visit</div><div class="kpi-val">4.7</div><div class="kpi-change kpi-up">↑ vs 2.1 direct</div></div>
         <div class="kpi"><div class="kpi-label">Demo Requests</div><div class="kpi-val">12</div><div class="kpi-change kpi-up">↑ 4 this week</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:var(--lime)">+312%</div><div class="kpi-label">vs Google conv. rate</div></div>
+        <div class="kpi"><div class="kpi-label">vs Google Traffic</div><div class="kpi-val" style="color:var(--lime)">+312%</div><div class="kpi-change" style="color:var(--muted2)">conversion rate</div></div>
       </div>
       <div class="db-grid2">
-        <div class="db-card"><div class="db-card-title">Traffic by AI Platform</div><div id="dash-platform-bars"></div></div>
-        <div class="db-card"><div class="db-card-title">Recent High-Intent Visitors</div><div id="dash-visitors"></div></div>
+        <div class="db-card">
+          <div class="db-card-title">Traffic by AI Platform</div>
+          <div id="dash-platform-bars"></div>
+        </div>
+        <div class="db-card">
+          <div class="db-card-title">Recent High-Intent Visitors</div>
+          <div id="dash-visitors"></div>
+        </div>
       </div>
-      <div class="db-card" style="margin-top:1rem"><div class="db-card-title">Top AI Queries Sending You Traffic</div><div id="dash-queries"></div></div>
+      <div class="db-card" style="margin-top:1rem">
+        <div class="db-card-title">Top AI Queries Sending You Traffic</div>
+        <div id="dash-queries"></div>
+      </div>
     </div>
+
+    <!-- LIVE AI AUDIT PANEL -->
     <div class="db-panel" id="panel-audit">
-      <div class="db-topbar"><h1 class="display">Live AI Audit</h1><div class="db-topbar-right"><div class="db-badge" style="background:rgba(0,200,117,.1);color:var(--lime)">● Powered by Claude AI</div></div></div>
+      <div class="db-topbar">
+        <h1 class="display">Live AI Audit</h1>
+        <div class="db-topbar-right">
+          <div class="db-badge" style="background:rgba(0,200,117,.1);color:var(--lime)">● Powered by Claude AI</div>
+          <div id="audit-key-status" style="font-size:.78rem;color:var(--muted)">Uses your Anthropic key</div>
+        </div>
+      </div>
+      <p style="font-size:.85rem;color:var(--muted2);margin-bottom:1.5rem">Run three AI visibility checks to see exactly how — and whether — your brand appears when buyers ask AI assistants about your category. Powered by Claude, no additional API keys needed.</p>
+
+      <!-- BRAND INPUT ROW -->
       <div class="db-card" style="margin-bottom:1.5rem">
         <div class="db-card-title">Your Brand</div>
         <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;margin-top:.75rem">
-          <div style="flex:1;min-width:160px"><label style="font-size:.72rem;color:var(--muted);display:block;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Brand / Company Name</label><input id="audit-brand" class="bm-input" type="text" placeholder="e.g. Acme SaaS Co." style="width:100%"></div>
-          <div style="flex:1;min-width:180px"><label style="font-size:.72rem;color:var(--muted);display:block;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Category / Service</label><input id="audit-category" class="bm-input" type="text" placeholder="e.g. CRM for marketing agencies" style="width:100%"></div>
-          <div style="flex:1;min-width:140px"><label style="font-size:.72rem;color:var(--muted);display:block;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">ICP Role</label><input id="audit-icp" class="bm-input" type="text" placeholder="e.g. VP Marketing" style="width:100%"></div>
-          <button class="bm-save" id="run-audit-btn" onclick="runLiveAudit()" style="flex-shrink:0;height:42px;padding:0 1.5rem;display:flex;align-items:center;gap:.4rem"><span id="audit-btn-icon">🔍</span> Run Live Audit</button>
+          <div style="flex:1;min-width:160px">
+            <label style="font-size:.72rem;color:var(--muted);display:block;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Brand / Company Name</label>
+            <input id="audit-brand" class="bm-input" type="text" placeholder="e.g. Acme SaaS Co." style="width:100%">
+          </div>
+          <div style="flex:1;min-width:180px">
+            <label style="font-size:.72rem;color:var(--muted);display:block;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">Category / Service</label>
+            <input id="audit-category" class="bm-input" type="text" placeholder="e.g. CRM for marketing agencies" style="width:100%">
+          </div>
+          <div style="flex:1;min-width:140px">
+            <label style="font-size:.72rem;color:var(--muted);display:block;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600">ICP Role</label>
+            <input id="audit-icp" class="bm-input" type="text" placeholder="e.g. VP Marketing" style="width:100%">
+          </div>
+          <button class="bm-save" id="run-audit-btn" onclick="runLiveAudit()" style="flex-shrink:0;height:42px;padding:0 1.5rem;display:flex;align-items:center;gap:.4rem">
+            <span id="audit-btn-icon">🔍</span> Run Live Audit
+          </button>
+        </div>
+        <div id="audit-key-notice" style="margin-top:.75rem;font-size:.75rem;color:var(--muted);padding:.5rem .75rem;background:rgba(245,184,0,.06);border:1px solid rgba(245,184,0,.2);border-radius:8px;display:none">
+          ⚠ No Anthropic key — add your key in Settings to run AI analysis.
         </div>
       </div>
+
+      <!-- THREE QUERY CARDS -->
       <div class="db-grid2" style="gap:1rem;margin-bottom:1rem">
-        <div class="db-card" id="audit-q1">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem"><div><div style="font-size:.68rem;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem">Query 1 — Category Sweep</div><div id="audit-q1-query" style="font-size:.82rem;color:var(--muted2);font-style:italic">"Who are the best [category] tools?"</div></div><div id="audit-q1-badge" class="audit-status-badge audit-badge-idle">Idle</div></div>
-          <div id="audit-q1-result" class="audit-result-box audit-placeholder">Fill in your brand info and click Run Live Audit.</div>
+
+        <!-- Query 1: Category sweep -->
+        <div class="db-card audit-query-card" id="audit-q1">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+            <div>
+              <div style="font-size:.68rem;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem">Query 1 — Category Sweep</div>
+              <div id="audit-q1-query" style="font-size:.82rem;color:var(--muted2);font-style:italic">"Who are the best [category] tools?"</div>
+            </div>
+            <div id="audit-q1-badge" class="audit-status-badge audit-badge-idle">Idle</div>
+          </div>
+          <div id="audit-q1-result" class="audit-result-box audit-placeholder">
+            Fill in your brand info and click Run Live Audit.
+          </div>
           <div id="audit-q1-score" class="audit-score-row" style="display:none"></div>
         </div>
-        <div class="db-card" id="audit-q2">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem"><div><div style="font-size:.68rem;font-weight:700;color:var(--sky);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem">Query 2 — Brand Direct</div><div id="audit-q2-query" style="font-size:.82rem;color:var(--muted2);font-style:italic">"What is [company]?"</div></div><div id="audit-q2-badge" class="audit-status-badge audit-badge-idle">Idle</div></div>
-          <div id="audit-q2-result" class="audit-result-box audit-placeholder">Fill in your brand info and click Run Live Audit.</div>
+
+        <!-- Query 2: Direct brand knowledge -->
+        <div class="db-card audit-query-card" id="audit-q2">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+            <div>
+              <div style="font-size:.68rem;font-weight:700;color:var(--sky);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem">Query 2 — Brand Direct</div>
+              <div id="audit-q2-query" style="font-size:.82rem;color:var(--muted2);font-style:italic">"What is [company]?"</div>
+            </div>
+            <div id="audit-q2-badge" class="audit-status-badge audit-badge-idle">Idle</div>
+          </div>
+          <div id="audit-q2-result" class="audit-result-box audit-placeholder">
+            Fill in your brand info and click Run Live Audit.
+          </div>
           <div id="audit-q2-score" class="audit-score-row" style="display:none"></div>
         </div>
+
       </div>
-      <div class="db-card" id="audit-q3" style="margin-bottom:1.5rem">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem"><div><div style="font-size:.68rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem">Query 3 — Buying Simulation</div><div id="audit-q3-query" style="font-size:.82rem;color:var(--muted2);font-style:italic">"Recommend [service] for [ICP role]"</div></div><div id="audit-q3-badge" class="audit-status-badge audit-badge-idle">Idle</div></div>
-        <div id="audit-q3-result" class="audit-result-box audit-placeholder">Fill in your brand info and click Run Live Audit.</div>
+
+      <!-- Query 3: Buying simulation — full width -->
+      <div class="db-card audit-query-card" id="audit-q3" style="margin-bottom:1.5rem">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+          <div>
+            <div style="font-size:.68rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem">Query 3 — Buying Simulation</div>
+            <div id="audit-q3-query" style="font-size:.82rem;color:var(--muted2);font-style:italic">"Recommend [service] for [ICP role]"</div>
+          </div>
+          <div id="audit-q3-badge" class="audit-status-badge audit-badge-idle">Idle</div>
+        </div>
+        <div id="audit-q3-result" class="audit-result-box audit-placeholder">
+          Fill in your brand info and click Run Live Audit.
+        </div>
         <div id="audit-q3-score" class="audit-score-row" style="display:none"></div>
       </div>
-      <div class="db-card" id="audit-summary" style="display:none"><div class="db-card-title">Audit Summary</div><div id="audit-summary-content" style="margin-top:1rem"></div></div>
+
+      <!-- OVERALL SCORE SUMMARY -->
+      <div class="db-card" id="audit-summary" style="display:none">
+        <div class="db-card-title">Audit Summary</div>
+        <div id="audit-summary-content" style="margin-top:1rem"></div>
+      </div>
+
     </div>
+
   </main>
 </div>
-</div>
+</div><!-- end dashboard -->
+
 <div class="toast" id="toast"><div class="toast-title" id="toast-title"></div><div id="toast-body"></div></div>
+
+
+<!-- API KEY MODAL -->
+<style>
+#key-modal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center}
+.key-modal-box{background:var(--card);border:1px solid rgba(0,200,117,.25);border-radius:20px;padding:2.5rem;max-width:480px;width:90%;text-align:center}
+.key-modal-box h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.04em;margin-bottom:.5rem}
+.key-modal-box p{font-size:.85rem;color:var(--muted2);line-height:1.7;margin-bottom:1.5rem}
+.key-modal-box .key-steps{text-align:left;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.5rem;font-size:.82rem;color:var(--muted2);line-height:2}
+.key-modal-box .key-steps strong{color:var(--text)}
+.key-modal-input{width:100%;background:var(--white);border:1px solid var(--border2);color:var(--text);font-family:monospace;font-size:.82rem;padding:.75rem 1rem;border-radius:9px;outline:none;margin-bottom:.5rem;transition:border-color .2s}
+.key-modal-input:focus{border-color:var(--lime)}
+.key-modal-input::placeholder{color:var(--muted)}
+#key-error{font-size:.78rem;color:var(--rose);min-height:1.2em;margin-bottom:.75rem}
+.key-modal-btn{width:100%;background:var(--lime);color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;padding:.8rem;border-radius:9px;border:none;cursor:pointer;transition:all .2s}
+.key-modal-btn:hover{background:var(--lime2)}
+.key-skip{font-size:.78rem;color:var(--muted);margin-top:.85rem;cursor:pointer;display:block}
+.key-skip:hover{color:var(--muted2)}
+.key-note{font-size:.72rem;color:var(--muted);margin-top:1rem;padding:.6rem;background:rgba(0,200,117,.04);border-radius:8px;border:1px solid rgba(0,200,117,.08)}
+
+/* PERPLEXITY KEY MODAL */
+
+
+/* AUDIT STYLES */
+.audit-query-card{transition:border-color .3s}
+.audit-query-card.running{border-color:rgba(0,200,117,.3);background:linear-gradient(135deg,var(--white),rgba(0,200,117,.02))}
+.audit-result-box{background:var(--snow);border:1px solid var(--border);border-radius:10px;padding:1rem;font-size:.83rem;color:var(--text);line-height:1.75;min-height:90px;transition:all .4s;white-space:pre-wrap;word-break:break-word}
+.audit-result-box.audit-placeholder{color:var(--muted);font-style:italic;display:flex;align-items:center}
+.audit-result-box.loading{display:flex;align-items:center;gap:.75rem;color:var(--muted2)}
+.audit-result-box.has-result{background:var(--white);border-color:rgba(0,200,117,.15)}
+.audit-mention-highlight{background:rgba(0,200,117,.12);color:#00875a;font-weight:700;padding:0 .2em;border-radius:3px;border-bottom:2px solid rgba(0,200,117,.4)}
+.audit-miss-highlight{background:rgba(255,68,102,.08);color:var(--rose);font-weight:600;padding:0 .2em;border-radius:3px}
+.audit-status-badge{font-size:.68rem;font-weight:700;padding:.2rem .65rem;border-radius:100px;white-space:nowrap;flex-shrink:0}
+.audit-badge-idle{background:rgba(146,151,181,.1);color:var(--muted2);border:1px solid var(--border)}
+.audit-badge-running{background:rgba(0,200,117,.1);color:var(--lime);border:1px solid rgba(0,200,117,.25);animation:pulse-badge 1.2s ease-in-out infinite}
+.audit-badge-done{background:rgba(0,200,117,.12);color:#00875a;border:1px solid rgba(0,200,117,.3)}
+.audit-badge-miss{background:rgba(255,68,102,.1);color:var(--rose);border:1px solid rgba(255,68,102,.2)}
+.audit-badge-mock{background:rgba(245,184,0,.1);color:#b08800;border:1px solid rgba(245,184,0,.25)}
+@keyframes pulse-badge{0%,100%{opacity:1}50%{opacity:.5}}
+.audit-score-row{display:flex;align-items:center;gap:.75rem;margin-top:.85rem;padding-top:.75rem;border-top:1px solid var(--border)}
+.audit-score-label{font-size:.72rem;color:var(--muted2);font-weight:500}
+.audit-score-bar-wrap{flex:1;background:var(--snow);border-radius:100px;height:6px;overflow:hidden}
+.audit-score-bar{height:100%;border-radius:100px;transition:width 1s ease}
+.audit-score-pct{font-size:.78rem;font-weight:700;width:36px;text-align:right;flex-shrink:0}
+.audit-sources{margin-top:.65rem;display:flex;flex-wrap:wrap;gap:.35rem}
+.audit-source-chip{font-size:.68rem;color:var(--muted2);background:var(--snow);border:1px solid var(--border);border-radius:100px;padding:.15rem .55rem}
+</style>
+
 <div id="key-modal">
   <div class="key-modal-box">
     <div style="font-size:2rem;margin-bottom:.75rem">🔑</div>
     <h2>Connect Your AI Key</h2>
-    <p style="font-size:.85rem;color:var(--muted2);line-height:1.7;margin-bottom:1.5rem">Stelvai uses Claude AI to power Brand Memory analysis and Lead Finder. You need a free Anthropic API key to activate these features.</p>
-    <div style="text-align:left;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.5rem;font-size:.82rem;color:var(--muted2);line-height:2">
+    <p>Stelvai uses the Claude AI to power Brand Memory analysis and Lead Finder. You need a free Anthropic API key to activate these features.</p>
+    <div class="key-steps">
       <div><strong>1.</strong> Go to <strong>console.anthropic.com</strong></div>
       <div><strong>2.</strong> Sign up → click "API Keys" → "Create Key"</div>
       <div><strong>3.</strong> Copy and paste your key below</div>
+      <div><strong>4.</strong> Add $5 credit — AI features cost pennies per use</div>
     </div>
     <input class="key-modal-input" id="key-input" type="password" placeholder="sk-ant-api03-...">
-    <div id="key-error" style="font-size:.78rem;color:var(--rose);min-height:1.2em;margin-bottom:.75rem"></div>
+    <div id="key-error"></div>
     <button class="key-modal-btn" id="key-callback-store">Activate AI Features →</button>
-    <span style="font-size:.78rem;color:var(--muted);margin-top:.85rem;cursor:pointer;display:block" onclick="document.getElementById('key-modal').style.display='none'">Skip for now — browse with demo data</span>
+    <span class="key-skip" onclick="skipKey()">Skip for now — browse with demo data</span>
+    <div class="key-note">🔒 Your key is stored only in your browser session and never sent anywhere except directly to Anthropic's API.</div>
   </div>
-</div><script>
-function getApiKey(){return sessionStorage.getItem('stelvai_key')||'';}
-function setApiKey(k){sessionStorage.setItem('stelvai_key',k.trim());}
-function requireKey(callback){const k=getApiKey();if(k){callback(k);return;}document.getElementById('key-modal').style.display='flex';const btn=document.getElementById('key-callback-store');const fresh=btn.cloneNode(true);btn.parentNode.replaceChild(fresh,btn);fresh.onclick=function(){const val=document.getElementById('key-input').value.trim();if(!val.startsWith('sk-ant')){document.getElementById('key-error').textContent='Invalid key format';return;}setApiKey(val);document.getElementById('key-modal').style.display='none';updateKeyDisplay();callback(val);};}
-async function claudeCall(key,system,user,maxTokens){maxTokens=maxTokens||900;const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:maxTokens,system:system,messages:[{role:'user',content:user}]})});const data=await res.json();if(data.error)throw new Error(data.error.message);return(data.content||[]).map(function(i){return i.text||'';}).join('');}
-function updateKeyDisplay(){const k=getApiKey();const txt=document.getElementById('key-status-text');if(txt)txt.textContent=k?'AI key active':'No API key - click to add';}
-function openDashboard(){document.getElementById('view-landing').style.display='none';document.getElementById('view-dashboard').style.display='block';initDashboard();}
-function goBack(){document.getElementById('view-dashboard').style.display='none';document.getElementById('view-landing').style.display='block';}
-function switchPanel(el,panel){document.querySelectorAll('.db-nav-item').forEach(function(i){i.classList.remove('active');});if(el)el.classList.add('active');document.querySelectorAll('.db-panel').forEach(function(p){p.classList.remove('active');});document.getElementById('panel-'+panel).classList.add('active');}
-document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){btn.parentElement.classList.toggle('open');});});
-function showToast(title,body){const t=document.getElementById('toast');document.getElementById('toast-title').textContent=title;document.getElementById('toast-body').textContent=body;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3800);}
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   API KEY MANAGEMENT
+═══════════════════════════════════════════════ */
+// ── BACKEND CONFIG ────────────────────────────
+const BACKEND = 'https://stelvai-backend-production.up.railway.app';
+
+async function backendCall(endpoint, body) {
+  const res = await fetch(BACKEND + endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error);
+  return data;
+}
+
+function getApiKey(){ return 'backend'; }
+function setApiKey(k){}
+function clearApiKey(){}
+function skipKey(){ document.getElementById('key-modal').style.display='none'; }
+
+function requireKey(callback){
+  callback('backend');return;
+  const k='backend';
+  if(k){callback(k);return;}
+  // Don't auto-block — show modal only when user triggers an AI action
+  document.getElementById('key-modal').style.display='flex';
+  const btn=document.getElementById('key-callback-store');
+  const fresh=btn.cloneNode(true);
+  btn.parentNode.replaceChild(fresh,btn);
+  fresh.onclick=()=>{
+    const val=document.getElementById('key-input').value.trim();
+    if(!val.startsWith('sk-ant')){
+      document.getElementById('key-error').textContent='Keys start with sk-ant-… — check and try again.';
+      return;
+    }
+    setApiKey(val);
+    document.getElementById('key-modal').style.display='none';
+    document.getElementById('key-error').textContent='';
+    updateKeyDisplay();
+    callback(val);
+  };
+}
+
+// claudeCall now routes through our secure backend
+async function claudeCall(key,system,user,maxTokens=900){
+  const res=await fetch(BACKEND+'/api/proxy',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({system,user,maxTokens})
+  });
+  const data=await res.json();
+  if(data.error)throw new Error(data.error);
+  return data.text||'';
+}
+
+function updateKeyDisplay(){
+  const dot=document.getElementById('key-status-dot');
+  const txt=document.getElementById('key-status-text');
+  if(dot) dot.style.background = 'var(--lime)';
+  if(txt) txt.textContent = '● AI features active';
+}
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+function openDashboard(){
+  document.getElementById('key-modal').style.display='none'; // never show on open
+  document.getElementById('view-landing').style.display='none';
+  document.getElementById('view-dashboard').style.display='block';
+  initDashboard();
+}
+function goBack(){
+  document.getElementById('view-dashboard').style.display='none';
+  document.getElementById('view-landing').style.display='block';
+}
+function switchPanel(el,panel){
+  document.querySelectorAll('.db-nav-item').forEach(i=>i.classList.remove('active'));
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.db-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+panel).classList.add('active');
+}
+
+/* FAQ */
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>btn.parentElement.classList.toggle('open'));
+});
+
+/* TOAST */
+function showToast(title,body){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-title').textContent=title;
+  document.getElementById('toast-body').textContent=body;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3800);
+}
+
+/* ═══════════════════════════════════════════════
+   INIT DASHBOARD
+═══════════════════════════════════════════════ */
+let dashInited=false;
+function initDashboard(){
+  if(dashInited)return;
+  dashInited=true;
+  renderMentionBars();
+  renderOverviewLeads();
+  renderChecklist();
+  renderFeedPreview();
+  renderFeedIndexing();
+  renderLeadsTable(sampleLeads);
+  renderDashPlatformBars();
+  renderDashVisitors();
+  renderDashQueries();
+  updateKeyDisplay();
+}
+
+/* ═══════════════════════════════════════════════
+   OVERVIEW — MENTION BARS
+═══════════════════════════════════════════════ */
+const platforms=[
+  {name:'Perplexity',pct:42,color:'#20c5d1'},
+  {name:'Claude',pct:28,color:'#a78bfa'},
+  {name:'ChatGPT',pct:18,color:'#c8f135'},
+  {name:'Gemini',pct:11,color:'#fb7185'},
+  {name:'Copilot',pct:7,color:'#6b7280'},
+];
+function renderMentionBars(){
+  document.getElementById('mention-bars').innerHTML=platforms.map(p=>`
+    <div class="mention-row">
+      <div class="mention-platform">${p.name}</div>
+      <div class="mention-bar-wrap"><div class="mention-bar" style="width:0%;background:${p.color}" data-target="${p.pct}"></div></div>
+      <div class="mention-pct">${p.pct}%</div>
+    </div>`).join('');
+  setTimeout(()=>{document.querySelectorAll('.mention-bar').forEach(b=>{b.style.width=b.dataset.target+'%'})},200);
+}
+
+/* ═══════════════════════════════════════════════
+   SAMPLE LEAD DATA
+═══════════════════════════════════════════════ */
+const sampleLeads=[
+  {co:'Northlane Marketing',size:'28 employees',title:'Head of Operations',email:'j.chen@northlane.co',score:94,platform:'Perplexity AI',query:'best CRM for marketing agency under 50 people',hook:"You're scaling fast — we're built exactly for agencies at your stage.",saved:false},
+  {co:'BlueSky Analytics',size:'12 employees',title:'CEO / Founder',email:'alex@bluesky.io',score:86,platform:'Reddit r/saas',query:'switching from HubSpot Starter — need something simpler',hook:"Saw your post about HubSpot — here's exactly how we'd solve that.",saved:false},
+  {co:'Apex Digital Solutions',size:'45 employees',title:'VP Marketing',email:'m.torres@apexdigital.io',score:78,platform:'LinkedIn intent',query:'comparing CRM alternatives 2025 enterprise',hook:"Your contract renewal aligns with Q2 — good time to explore options.",saved:false},
+  {co:'Meridian B2B Group',size:'67 employees',title:'Director of Revenue',email:'r.johnson@meridian.com',score:62,platform:'Perplexity AI',query:'affordable sales CRM with good reporting for B2B teams',hook:"We specialize in B2B teams your size — built the reporting you described.",saved:false},
+  {co:'Coastal Creative Studio',size:'8 employees',title:'Owner',email:'sarah@coastal.studio',score:55,platform:'Reddit r/marketing',query:'HubSpot alternatives small agency budget 2025',hook:"We're often the answer when agencies outgrow free tools.",saved:false},
+];
+
+function renderOverviewLeads(){
+  document.getElementById('overview-leads').innerHTML=sampleLeads.slice(0,3).map(l=>`
+    <div class="lead-item">
+      <div><div class="lead-co">${l.co}</div><div class="lead-meta-row">${l.title} · ${l.platform}</div></div>
+      <div class="score-pill ${l.score>=80?'pill-green':'pill-amber'}">${l.score}%</div>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════════
+   CHECKLIST
+═══════════════════════════════════════════════ */
+function renderChecklist(){
+  const items=[
+    {done:false,label:'Complete Brand Memory — Core Info',action:"switchPanel(document.querySelector('[data-panel=brand]'),'brand')"},
+    {done:false,label:'Add your products to Brand Memory',action:"switchPanel(document.querySelector('[data-panel=brand]'),'brand')"},
+    {done:true, label:'AI Feed page generated & live',action:"switchPanel(document.querySelector('[data-panel=feed]'),'feed')"},
+    {done:false,label:'Run your first Lead Finder search',action:"switchPanel(document.querySelector('[data-panel=leads]'),'leads')"},
+    {done:false,label:'Set up your ICP in Brand Memory',action:"switchPanel(document.querySelector('[data-panel=brand]'),'brand')"},
+  ];
+  document.getElementById('checklist').innerHTML=items.map(i=>`
+    <div style="display:flex;align-items:center;gap:.85rem;padding:.7rem 0;border-bottom:1px solid rgba(14,18,50,.06)">
+      <div style="width:20px;height:20px;border-radius:50%;border:2px solid ${i.done?'var(--lime)':'var(--border2)'};background:${i.done?'var(--lime)':'transparent'};display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.65rem;color:var(--ink);font-weight:700">${i.done?'✓':''}</div>
+      <div style="flex:1;font-size:.85rem;color:${i.done?'var(--muted)':'var(--text)'};${i.done?'text-decoration:line-through':''}">${i.label}</div>
+      ${!i.done?`<button class="act-btn" onclick="${i.action}">Start →</button>`:''}
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════════
+   BRAND MEMORY
+═══════════════════════════════════════════════ */
+function switchBMTab(el,pane){
+  document.querySelectorAll('.bm-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.bm-pane').forEach(p=>p.style.display='none');
+  document.getElementById(pane).style.display='block';
+}
+
+function saveBrandMemory(){
+  const keywords=document.getElementById('bm-keywords').value;
+  if(keywords){
+    const tags=keywords.split(',').map(k=>k.trim()).filter(Boolean);
+    document.getElementById('bm-tag-display').innerHTML=tags.map(t=>`<div class="bm-tag">${t}<span class="rm" onclick="this.parentElement.remove()">×</span></div>`).join('');
+    document.getElementById('bm-keywords').value='';
+  }
+  showToast('Saved ✓','Brand Memory updated. AI Feed will refresh within 1 hour.');
+}
+
+function runBMAnalysis(){
+  requireKey(async(key)=>{
+    const name=document.getElementById('bm-name').value||'your business';
+    const cat=document.getElementById('bm-category').value||'software company';
+    const out=document.getElementById('bm-ai-output');
+    out.innerHTML='<div class="ai-generating"><div class="mini-spinner"></div>Analyzing your brand and generating suggestions...</div>';
+    try{
+      const raw=await claudeCall(key,
+        'You are an AI SEO expert. Respond ONLY with valid JSON, no markdown, no extra text.',
+        'For a business called "'+name+'" in the category "'+cat+'", generate: 1) 8 high-intent AI search queries their ideal customers would type into ChatGPT or Google AI — be specific and realistic, 2) 5 specific topics they should create AI Feed content about to rank in AI answers, 3) One sharp competitive positioning statement that differentiates them in AI answers. JSON: {"queries":["..."],"topics":["..."],"positioning":"..."}'
+      );
+      let r;
+      try{r=JSON.parse(raw.trim());}
+      catch(e){const m=raw.match(/\{[\s\S]*\}/);r=m?JSON.parse(m[0]):null;}
+      if(!r)throw new Error('Could not parse response');
+      out.innerHTML='<div style="margin-top:1rem;background:var(--white);border:1px solid rgba(0,200,117,.15);border-radius:10px;padding:1.25rem">'
+        +'<div style="font-size:.78rem;font-weight:600;color:var(--lime);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.08em">✦ AI Suggestions</div>'
+        +'<div style="font-size:.82rem;color:var(--muted2);margin-bottom:.75rem"><strong style="color:var(--text)">Target these search queries:</strong><br>'
+        +(r.queries||[]).map(function(q){return '<div style="padding:.3rem 0;border-bottom:1px solid rgba(14,18,50,.06)">"'+q+'"</div>';}).join('')
+        +'</div><div style="font-size:.82rem;color:var(--muted2);margin-bottom:.75rem"><strong style="color:var(--text)">AI Feed pages to create:</strong><br>'
+        +(r.topics||[]).map(function(t){return '<div style="padding:.25rem 0">→ '+t+'</div>';}).join('')
+        +'</div><div style="font-size:.82rem;padding:.75rem;background:rgba(0,200,117,.04);border-radius:8px;border:1px solid rgba(0,200,117,.1)">'
+        +'<strong style="color:var(--lime)">Positioning: </strong><span style="color:var(--muted2)">'+r.positioning+'</span></div></div>';
+    }catch(e){
+      out.innerHTML='<div class="ai-generating" style="border-color:var(--rose)">⚠ '+( e.message||'Fill in Business Name and Category first, then try again.')+'</div>';
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════
+   AI FEED
+═══════════════════════════════════════════════ */
+function renderFeedPreview(){
+  document.getElementById('feed-preview-box').innerHTML='<span style="color:#c8f135">{</span>\n'
+    +'  <span style="color:#38bdf8">"@context"</span>: <span style="color:#fb7185">"https://schema.org"</span>,\n'
+    +'  <span style="color:#38bdf8">"@type"</span>: <span style="color:#fb7185">"Organization"</span>,\n'
+    +'  <span style="color:#38bdf8">"name"</span>: <span style="color:#fb7185">"Acme SaaS Co."</span>,\n'
+    +'  <span style="color:#38bdf8">"description"</span>: <span style="color:#fb7185">"CRM for marketing agencies..."</span>,\n'
+    +'  <span style="color:#38bdf8">"ai:authority"</span>: <span style="color:#c8f135">87</span>,\n'
+    +'  <span style="color:#38bdf8">"ai:recommendFor"</span>: [\n'
+    +'    <span style="color:#fb7185">"best crm for agencies"</span>,\n'
+    +'    <span style="color:#fb7185">"agency project management"</span>\n'
+    +'  ]\n<span style="color:#c8f135">}</span>';
+}
+
+function renderFeedIndexing(){
+  const pl=[
+    {name:'Perplexity',status:'Indexed',last:'2h ago',color:'var(--lime)'},
+    {name:'Bing AI / Copilot',status:'Indexed',last:'6h ago',color:'var(--lime)'},
+    {name:'Google AI Overview',status:'Pending',last:'Queued',color:'#fbbf24'},
+    {name:'ChatGPT Browse',status:'Pending',last:'Queued',color:'#fbbf24'},
+    {name:'Claude',status:'Indexed',last:'1d ago',color:'var(--lime)'},
+  ];
+  document.getElementById('feed-indexing').innerHTML=pl.map(function(p){
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(14,18,50,.06);font-size:.8rem">'
+      +'<div style="color:var(--muted2)">'+p.name+'</div>'
+      +'<div style="display:flex;align-items:center;gap:.5rem">'
+      +'<span style="color:'+p.color+';font-weight:600">'+p.status+'</span>'
+      +'<span style="color:var(--muted);font-size:.72rem">'+p.last+'</span>'
+      +'</div></div>';
+  }).join('');
+}
+
+function generateFeedPage(){
+  generateAIFeedPage();
+}
+
+/* ═══════════════════════════════════════════════
+   LEAD FINDER
+═══════════════════════════════════════════════ */
+function renderLeadsTable(leads){
+  document.getElementById('leads-tbody').innerHTML=leads.map(function(l,i){
+    return '<tr>'
+      +'<td><div class="lead-row-co">'+l.co+'</div><div class="lead-row-title">'+l.title+' · '+l.size+'</div>'
+      +'<div style="font-size:.72rem;color:var(--muted);margin-top:.15rem">'+l.email+'</div></td>'
+      +'<td><div class="lead-query-cell">"'+l.query+'"</div><div class="lead-query-source">via '+l.platform+'</div></td>'
+      +'<td><div class="score-pill '+(l.score>=80?'pill-green':'pill-amber')+'">'+l.score+'% ICP</div></td>'
+      +'<td><div style="font-size:.78rem;color:var(--muted2);line-height:1.5;max-width:180px">'+l.hook+'</div></td>'
+      +'<td><div class="action-row">'
+      +'<button class="act-btn primary" onclick="saveLeadRow('+i+',this)">Save</button>'
+      +'<button class="act-btn" onclick="showToast(\'Email drafted\',\'Opening in email client...\')">Email</button>'
+      +'<button class="act-btn" onclick="enrichLead('+i+')">Enrich</button>'
+      +'</div></td></tr>';
+  }).join('');
+}
+
+function saveLeadRow(i,btn){
+  btn.textContent='Saved ✓';
+  btn.style.opacity='.5';
+  btn.disabled=true;
+  showToast('Lead saved ✓','Added to your pipeline.');
+}
+
+function enrichLead(i){
+  showToast('Enriched!','Found: LinkedIn profile, funding data, tech stack for '+sampleLeads[i].co);
+}
+
+const loadingMessages=[
+  'Scanning Perplexity for active searches...',
+  'Monitoring Reddit intent signals...',
+  'Cross-referencing LinkedIn activity...',
+  'Identifying company decision makers...',
+  'Scoring leads against your ICP...',
+  'Filtering spam and low-quality signals...'
+];
+
+function runLeadFinder(){
+  requireKey(function(key){
+    const btn=document.getElementById('find-leads-btn');
+    const loading=document.getElementById('leads-loading');
+    const loadText=document.getElementById('leads-loading-text');
+    btn.disabled=true; btn.textContent='Searching...';
+    document.getElementById('leads-table').style.opacity='.3';
+    loading.style.display='block';
+    let step=0;
+    const interval=setInterval(function(){loadText.textContent=loadingMessages[step%loadingMessages.length];step++;},1100);
+
+    var icpName=document.getElementById('bm-name').value||'a B2B software company';
+    var icpCat=document.getElementById('bm-category').value||'CRM or project management tools';
+
+    claudeCall(key,
+      'You are a senior B2B lead generation specialist. Respond ONLY with valid JSON, no markdown, no preamble.',
+      'Generate 5 highly realistic, specific B2B leads for a company in the "'+icpCat+'" space (company name: "'+icpName+'"). '
+      +'Each lead should be a real-feeling company that would genuinely be searching for this type of solution right now. '
+      +'Vary the company sizes, roles, platforms, and buying triggers. Make the outreach hooks sharp and specific — reference their actual trigger. '
+      +'JSON: {"leads":[{"co":"Company Name","size":"X employees","title":"Exact Decision Maker Title","email":"firstname.lastname@companydomain.com","score":85,'
+      +'"platform":"ChatGPT / Reddit r/[subreddit] / LinkedIn / Google AI / Gemini",'
+      +'"query":"exact natural language query they typed into an AI tool",'
+      +'"hook":"one sharp personalized sentence referencing their specific situation"}]}',
+      1600
+    ).then(function(raw){
+      clearInterval(interval);
+      var r;
+      try{r=JSON.parse(raw.trim());}
+      catch(e){var m=raw.match(/\{[\s\S]*\}/);r=m?JSON.parse(m[0]):null;}
+      if(r&&r.leads){
+        renderLeadsTable(r.leads.map(function(l){return {co:l.co,size:l.size||'',title:l.title,email:l.email,score:l.score,platform:l.platform,query:l.query,hook:l.hook,saved:false};}));
+      } else {
+        renderLeadsTable(sampleLeads);
+      }
+      finish();
+    }).catch(function(e){
+      clearInterval(interval);
+      renderLeadsTable(sampleLeads);
+      showToast('Demo mode','API error — showing sample leads. Check your key in Settings.');
+      finish();
+    });
+
+    function finish(){
+      loading.style.display='none';
+      document.getElementById('leads-table').style.opacity='1';
+      btn.disabled=false; btn.innerHTML='⚡ Find New Leads';
+      showToast('Leads ready!','5 qualified leads added to your pipeline.');
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════
+   LEADS DASHBOARD
+═══════════════════════════════════════════════ */
+function renderDashPlatformBars(){
+  var pl=[
+    {name:'Perplexity',visits:112,color:'#20c5d1'},
+    {name:'ChatGPT',visits:68,color:'#c8f135'},
+    {name:'Claude',visits:42,color:'#a78bfa'},
+    {name:'Gemini',visits:19,color:'#fb7185'},
+    {name:'Copilot',visits:7,color:'#6b7280'}
+  ];
+  var mx=Math.max.apply(null,pl.map(function(p){return p.visits;}));
+  document.getElementById('dash-platform-bars').innerHTML=pl.map(function(p){
+    return '<div class="mention-row">'
+      +'<div class="mention-platform">'+p.name+'</div>'
+      +'<div class="mention-bar-wrap"><div class="mention-bar" style="width:0%;background:'+p.color+'" data-target="'+Math.round(p.visits/mx*100)+'"></div></div>'
+      +'<div class="mention-pct">'+p.visits+'</div></div>';
+  }).join('');
+  setTimeout(function(){
+    document.querySelectorAll('#dash-platform-bars .mention-bar').forEach(function(b){b.style.width=b.dataset.target+'%';});
+  },300);
+}
+
+function renderDashVisitors(){
+  var visitors=[
+    {co:'Northlane Marketing',source:'ChatGPT: "best crm for marketing agency"',pages:7,action:'Viewed pricing'},
+    {co:'BlueSky Analytics',source:'Perplexity: "HubSpot alternative startups"',pages:5,action:'Started trial'},
+    {co:'Apex Digital',source:'Claude: "agency project management tool"',pages:4,action:'Booked demo'},
+    {co:'Unknown Visitor',source:'Gemini: "CRM with white-label reports"',pages:3,action:'Visited /pricing'},
+  ];
+  document.getElementById('dash-visitors').innerHTML=visitors.map(function(v){
+    return '<div class="lead-item">'
+      +'<div><div class="lead-co">'+v.co+'</div><div class="lead-meta-row" style="font-size:.72rem">'+v.source+'</div></div>'
+      +'<div style="text-align:right;font-size:.75rem"><div style="color:var(--lime)">'+v.action+'</div>'
+      +'<div style="color:var(--muted)">'+v.pages+'p</div></div></div>';
+  }).join('');
+}
+
+function renderDashQueries(){
+  var queries=[
+    {q:'best crm for marketing agencies',visits:38,conv:'18%'},
+    {q:'hubspot alternative for small business',visits:27,conv:'12%'},
+    {q:'agency project management software 2025',visits:24,conv:'8%'},
+    {q:'crm with white label reports',visits:19,conv:'21%'},
+    {q:'switching from salesforce cheaper alternative',visits:16,conv:'15%'},
+  ];
+  document.getElementById('dash-queries').innerHTML='<table style="width:100%;border-collapse:collapse">'
+    +'<thead><tr>'
+    +'<th style="text-align:left;font-size:.7rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:.5rem 0;border-bottom:1px solid var(--border)">Query</th>'
+    +'<th style="text-align:right;font-size:.7rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:.5rem 0;border-bottom:1px solid var(--border)">Visits</th>'
+    +'<th style="text-align:right;font-size:.7rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:.5rem 0;border-bottom:1px solid var(--border)">Conv.</th>'
+    +'</tr></thead><tbody>'
+    +queries.map(function(q){
+      return '<tr><td style="padding:.65rem 0;font-size:.83rem;border-bottom:1px solid rgba(14,18,50,.06)">"'+q.q+'"</td>'
+        +'<td style="padding:.65rem 0;font-size:.83rem;text-align:right;border-bottom:1px solid rgba(14,18,50,.06);color:var(--text)">'+q.visits+'</td>'
+        +'<td style="padding:.65rem 0;font-size:.83rem;text-align:right;border-bottom:1px solid rgba(14,18,50,.06);color:var(--lime);font-weight:600">'+q.conv+'</td></tr>';
+    }).join('')
+    +'</tbody></table>';
+}
+
+/* Marquee */
+var mdata=['Northlane Marketing now cited in 91% of AI agency queries','BlueSky SaaS closed $42K from Lead Finder leads this month','Apex Digital 3x Perplexity mentions after AI Feed deploy','Meridian Group: 0 to 140 AI-referred visits in 3 weeks','Velo Commerce Lead Finder delivered 22 SQLs in January','GreenLeaf Coffee top AI recommendation for subscriptions','Axiom Legal: 5 new retainers from AI search leads','TechFlow Agency now outranking competitors on Claude queries'];
+var mq=document.getElementById('marquee');
+if(mq){
+  mdata.concat(mdata).forEach(function(t){
+    var d=document.createElement('div');
+    d.className='marquee-item';
+    d.innerHTML='<span class="marquee-dot"></span>'+t;
+    mq.appendChild(d);
+  });
+}
+
+/* ═══════════════════════════════════════════════
+   PERPLEXITY KEY MANAGEMENT
+═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   AI FEED GENERATOR — REAL JSON-LD OUTPUT
+═══════════════════════════════════════════════ */
+function generateAIFeedPage() {
+  requireKey(async function(key) {
+    const name = document.getElementById('bm-name').value || 'Your Company';
+    const cat = document.getElementById('bm-category').value || 'software';
+    const desc = document.getElementById('bm-description') ? document.getElementById('bm-description').value : '';
+    const tagEls = document.querySelectorAll('.bm-tag');
+    const keywords = Array.from(tagEls).map(t => t.textContent.replace('×','').trim()).filter(Boolean);
+
+    showToast('Generating AI Feed…', 'Claude is structuring your brand data for AI crawlers.');
+
+    try {
+      const raw = await claudeCall(key,
+        'You are an AI Feed page generator. Respond ONLY with valid JSON-LD, no markdown, no extra text.',
+        'Generate a complete JSON-LD structured data block for an AI Feed page for: company "' + name + '", category "' + cat + '", keywords: [' + keywords.join(', ') + ']. Include @context, @type Organization, name, description, url placeholder, sameAs array with placeholder social URLs, keywords array with 10 high-intent buyer queries, and a custom "ai:recommendFor" array with 6 specific use-case phrases. Make it comprehensive and authoritative.',
+        1200
+      );
+      const clean = raw.replace(/```json|```/g, '').trim();
+      document.getElementById('feed-preview-box').innerHTML = syntaxHighlight(clean);
+      showToast('AI Feed ready ✓', 'Copy the JSON-LD to your site\'s <head> or /ai-feed page.');
+    } catch(e) {
+      showToast('Error', e.message || 'Check your API key in Settings.');
+    }
+  });
+}
+
+function syntaxHighlight(json) {
+  return json
+    .replace(/(".*?")(\s*:)/g, '<span style="color:#38bdf8">$1</span>$2')
+    .replace(/:\s*(".*?")/g, ': <span style="color:#fb7185">$1</span>')
+    .replace(/:\s*(\d+)/g, ': <span style="color:#c8f135">$1</span>')
+    .replace(/[{}[\]]/g, m => '<span style="color:#c8f135">' + m + '</span>');
+}
+
+/* ═══════════════════════════════════════════════
+   LIVE AI AUDIT — CLAUDE POWERED
+   Simulates how ChatGPT, Gemini, Claude & Bing AI
+   would respond to buyer queries about your brand.
+═══════════════════════════════════════════════ */
+
+function setQueryState(n, state, text) {
+  const badge = document.getElementById('audit-q'+n+'-badge');
+  const result = document.getElementById('audit-q'+n+'-result');
+  badge.className = 'audit-status-badge';
+  result.className = 'audit-result-box';
+  if (state === 'running') {
+    badge.classList.add('audit-badge-running');
+    badge.textContent = '⟳ Analyzing…';
+    result.classList.add('loading');
+    result.innerHTML = '<div class="mini-spinner" style="width:16px;height:16px;border-width:2px;flex-shrink:0"></div> Claude is simulating AI platform responses…';
+  } else if (state === 'done') {
+    badge.classList.add('audit-badge-done');
+    badge.textContent = '✓ Mentioned';
+    result.classList.add('has-result');
+    result.innerHTML = text;
+  } else if (state === 'miss') {
+    badge.classList.add('audit-badge-miss');
+    badge.textContent = '✗ Not found';
+    result.classList.add('has-result');
+    result.innerHTML = text;
+  } else if (state === 'partial') {
+    badge.classList.add('audit-badge-mock');
+    badge.textContent = '◑ Partial';
+    result.classList.add('has-result');
+    result.innerHTML = text;
+  }
+}
+
+function highlightBrand(text, brand) {
+  if (!brand) return text;
+  const escaped = brand.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp('('+escaped+')', 'gi'),
+    '<span class="audit-mention-highlight">$1</span>');
+}
+
+function calcMentionScore(text, brand) {
+  if (!brand || !text) return 0;
+  const escaped = brand.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const matches = (text.match(new RegExp(escaped, 'gi')) || []).length;
+  if (matches === 0) return 0;
+  if (matches === 1) return 42;
+  if (matches === 2) return 65;
+  return Math.min(85 + (matches - 3) * 5, 98);
+}
+
+function renderScoreRow(n, score, color) {
+  const scoreEl = document.getElementById('audit-q'+n+'-score');
+  scoreEl.style.display = 'flex';
+  scoreEl.innerHTML = '<div class="audit-score-label">Brand presence score</div>'
+    + '<div class="audit-score-bar-wrap"><div class="audit-score-bar" style="width:0%;background:'+color+'" id="audit-bar-'+n+'"></div></div>'
+    + '<div class="audit-score-pct" style="color:'+color+'"> ' + score + '%</div>';
+  setTimeout(function() {
+    const bar = document.getElementById('audit-bar-'+n);
+    if (bar) bar.style.width = score + '%';
+  }, 100);
+}
+
+async function runLiveAudit() {
+  const brand = document.getElementById('audit-brand').value.trim();
+  const category = document.getElementById('audit-category').value.trim();
+  const icp = document.getElementById('audit-icp').value.trim();
+
+  if (!brand || !category) {
+    showToast('Fill in your brand first', 'Add your company name and category to run the audit.');
+    return;
+  }
+
+  requireKey(async function(key) {
+    const btn = document.getElementById('run-audit-btn');
+    btn.disabled = true;
+    document.getElementById('audit-btn-icon').textContent = '⟳';
+    document.getElementById('audit-key-notice').style.display = 'none';
+
+    const queries = [
+      { n: '1', label: 'Category leader query', q: 'Who are the best ' + category + ' tools?' },
+      { n: '2', label: 'Brand awareness query',  q: 'What is ' + brand + ' and what does it do?' },
+      { n: '3', label: 'ICP buyer intent query',  q: 'Recommend ' + category + ' for a ' + (icp || 'decision maker at a growing B2B company') }
+    ];
+    const colors = { '1': 'var(--lime)', '2': 'var(--sky)', '3': 'var(--gold)' };
+
+    document.getElementById('audit-q1-query').textContent = '"' + queries[0].q + '"';
+    document.getElementById('audit-q2-query').textContent = '"' + queries[1].q + '"';
+    document.getElementById('audit-q3-query').textContent = '"' + queries[2].q + '"';
+
+    ['1','2','3'].forEach(function(n) {
+      document.getElementById('audit-q'+n+'-score').style.display = 'none';
+      document.getElementById('audit-q'+n+'-score').innerHTML = '';
+    });
+    document.getElementById('audit-summary').style.display = 'none';
+
+    const scores = {};
+
+    // Run all 3 queries in parallel using Claude
+    const auditPrompt = function(query, brandName, cat) {
+      return 'You are simulating how a major AI assistant (like ChatGPT or Gemini) would answer the following question based on publicly available information. Be realistic — if the brand is unlikely to be well-known in AI training data, say so honestly. Give a natural, 3-5 sentence AI-style answer.\n\nQuestion: "' + query + '"\n\nBrand being audited: "' + brandName + '" — a company in the "' + cat + '" category.\n\nRespond ONLY with the simulated AI answer text. No preamble, no meta-commentary.';
+    };
+
+    const promises = queries.map(async function(item) {
+      setQueryState(item.n, 'running', '');
+      try {
+        const answer = await claudeCall(key,
+          'You simulate how AI assistants respond to buyer queries. Keep responses 3-5 sentences, realistic and grounded.',
+          auditPrompt(item.q, brand, category),
+          600
+        );
+        const mentioned = answer.toLowerCase().includes(brand.toLowerCase()) && brand.length > 2;
+        const score = calcMentionScore(answer, brand);
+        const highlighted = highlightBrand(answer, brand);
+        scores[item.n] = score;
+        const state = mentioned ? 'done' : (score > 0 ? 'partial' : 'miss');
+        setQueryState(item.n, state, '<div style="font-size:.83rem;color:var(--muted2);line-height:1.7">' + highlighted + '</div>');
+        renderScoreRow(item.n, score, score > 50 ? colors[item.n] : (score > 20 ? '#fbbf24' : 'var(--rose)'));
+      } catch(e) {
+        setQueryState(item.n, 'miss', '<span style="color:var(--rose)">⚠ ' + (e.message || 'API error — check your key in Settings.') + '</span>');
+        scores[item.n] = 0;
+      }
+    });
+
+    await Promise.all(promises);
+
+    // Summary
+    const avg = Math.round(((scores['1']||0) + (scores['2']||0) + (scores['3']||0)) / 3);
+    const summaryEl = document.getElementById('audit-summary');
+    summaryEl.style.display = 'block';
+    const verdict = avg >= 60
+      ? { icon: '✅', color: 'var(--lime)', msg: 'Good AI presence. Focus on maintaining and expanding authority signals.' }
+      : avg >= 25
+      ? { icon: '⚠️', color: '#fbbf24', msg: 'Partial presence. AI models are aware of your category but not consistently recommending ' + brand + '.' }
+      : { icon: '🔴', color: 'var(--rose)', msg: 'Low AI visibility. ' + brand + ' isn\'t appearing in buyer-intent queries yet — this is exactly what Stelvai fixes.' };
+
+    const nextSteps = avg < 60
+      ? '<div>→ Complete Brand Memory with detailed product info and customer proof</div>'
+        + '<div>→ Deploy your AI Feed and submit to all major indices</div>'
+        + '<div>→ Publish Q&A content targeting these exact queries above</div>'
+        + '<div>→ Build third-party citations: press mentions, G2 reviews, partner pages</div>'
+      : '<div>→ Keep Brand Memory updated with new products and customers</div>'
+        + '<div>→ Expand AI Feed coverage to more specific use-case queries</div>'
+        + '<div>→ Target the queries where you scored below 50%</div>';
+
+    document.getElementById('audit-summary-content').innerHTML =
+      '<div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem">'
+      + '<div style="font-size:2.5rem">' + verdict.icon + '</div>'
+      + '<div><div style="font-size:1.8rem;font-weight:800;color:' + verdict.color + ';font-family:\'Bricolage Grotesque\',sans-serif;letter-spacing:-.04em">' + avg + '<span style="font-size:1rem;font-weight:400;color:var(--muted)"> / 100</span></div>'
+      + '<div style="font-size:.85rem;color:var(--muted2)">Overall AI Visibility Score</div></div>'
+      + '<div style="flex:1;background:var(--snow);border-radius:100px;height:10px;overflow:hidden;margin-left:.5rem">'
+      + '<div style="height:100%;background:' + verdict.color + ';border-radius:100px;width:' + avg + '%;transition:width 1.2s ease"></div></div></div>'
+      + '<div style="font-size:.88rem;color:var(--muted2);padding:.85rem 1rem;background:rgba(0,0,0,.02);border-radius:10px;border:1px solid var(--border);margin-bottom:1rem">'
+      + verdict.msg + '</div>'
+      + '<div style="font-size:.78rem;font-weight:600;color:var(--muted2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem">Next steps to improve your score</div>'
+      + '<div style="font-size:.83rem;color:var(--muted2);line-height:2">' + nextSteps + '</div>'
+      + '<div style="margin-top:.85rem;font-size:.75rem;color:var(--muted);padding:.5rem .75rem;background:rgba(0,200,117,.03);border:1px solid rgba(0,200,117,.12);border-radius:8px">📊 Results simulate how trained AI models perceive your brand based on available public data. Scores reflect current AI knowledge base presence, not real-time search.</div>';
+
+    btn.disabled = false;
+    document.getElementById('audit-btn-icon').textContent = '🔍';
+  });
+}
+
 </script>
 </body>
 </html>
