@@ -1534,6 +1534,7 @@ function openDashboard(forceLogin){
     loadUserSession(session);
 
     initDashboard();
+    loadBrandMemory();
 
     return;
 
@@ -1665,14 +1666,44 @@ function switchBMTab(el,pane){
   document.getElementById(pane).style.display='block';
 }
 
-function saveBrandMemory(){
-  const keywords=document.getElementById('bm-keywords').value;
-  if(keywords){
-    const tags=keywords.split(',').map(k=>k.trim()).filter(Boolean);
-    document.getElementById('bm-tag-display').innerHTML=tags.map(t=>`<div class="bm-tag">${t}<span class="rm" onclick="this.parentElement.remove()">×</span></div>`).join('');
-    document.getElementById('bm-keywords').value='';
+async function saveBrandMemory(){
+  const session = getSession();
+  const data = {
+    company_name: document.getElementById('bm-name').value,
+    website: document.getElementById('bm-url').value,
+    category: document.getElementById('bm-category').value,
+    tagline: document.getElementById('bm-tagline').value,
+    founded: document.getElementById('bm-founded').value,
+    social_proof: document.getElementById('bm-proof').value,
+    awards: document.getElementById('bm-awards').value,
+    keywords: document.getElementById('bm-keywords').value,
+  };
+  if(session && session.email){
+    try {
+      await fetch('https://stelvai-backend-production.up.railway.app/api/brand-memory/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: session.email, ...data })
+      });
+    } catch(e) { console.error('Save error:', e); }
   }
-  showToast('Saved ✓','Brand Memory updated. AI Feed will refresh within 1 hour.');
+  showToast('Saved ✓', 'Brand Memory updated.');
+}
+
+async function loadBrandMemory(){
+  const session = getSession();
+  if(!session || !session.email) return;
+  try {
+    const res = await fetch('https://stelvai-backend-production.up.railway.app/api/brand-memory/load?email=' + encodeURIComponent(session.email));
+    const data = await res.json();
+    if(!data || !data.company_name) return;
+    const fields = ['company_name','website','category','tagline','founded','social_proof','awards','keywords'];
+    const ids = ['bm-name','bm-url','bm-category','bm-tagline','bm-founded','bm-proof','bm-awards','bm-keywords'];
+    fields.forEach(function(f,i){
+      const el = document.getElementById(ids[i]);
+      if(el && data[f]) el.value = data[f];
+    });
+  } catch(e) { console.error('Load error:', e); }
 }
 
 function runBMAnalysis(){
