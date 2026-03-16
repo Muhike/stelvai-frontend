@@ -2218,13 +2218,11 @@ function clearAuthErrors() {
   if(e2) e2.textContent = '';
 }
 
-// Session management (localStorage)
 function getSession() {
   try {
     var s = localStorage.getItem('stelvai_session');
     if(!s) return null;
     var parsed = JSON.parse(s);
-    // Sessions expire after 30 days
     if(Date.now() - parsed.ts > 30 * 24 * 60 * 60 * 1000) {
       localStorage.removeItem('stelvai_session');
       return null;
@@ -2234,7 +2232,7 @@ function getSession() {
 }
 
 function saveSession(data) {
-  localStorage.setItem('stelvai_session', JSON.stringify({ ...data, ts: Date.now() }));
+  localStorage.setItem('stelvai_session', JSON.stringify(Object.assign({}, data, { ts: Date.now() })));
 }
 
 function clearSession() {
@@ -2242,21 +2240,16 @@ function clearSession() {
 }
 
 function loadUserSession(session) {
-  // Update the dashboard UI with user's name and plan
   var nameEl = document.querySelector('.db-user-name');
-  var planEl = document.querySelector('.db-user-info');
+  var infoEl = document.querySelector('.db-user-info');
   var avatarEl = document.querySelector('.db-avatar');
-  if(nameEl) nameEl.textContent = session.name || session.email.split('@')[0];
-  if(planEl) {
-    planEl.innerHTML = '<div class="db-user-name">' + (session.name || session.email.split('@')[0]) + '</div>' + (session.plan || 'Trial') + ' Plan';
-  }
-  if(avatarEl) {
-    var initials = (session.name || session.email).substring(0,2).toUpperCase();
-    avatarEl.textContent = initials;
-  }
-  // Update key status
+  var displayName = session.name || session.email.split('@')[0];
+  var planLabel = session.plan ? (session.plan.charAt(0).toUpperCase() + session.plan.slice(1)) : 'Trial';
+  if(nameEl) nameEl.textContent = displayName;
+  if(infoEl) infoEl.innerHTML = '<div class="db-user-name" style="color:var(--text);font-weight:600;font-size:.82rem">' + displayName + '</div>' + planLabel + ' Plan';
+  if(avatarEl) avatarEl.textContent = displayName.substring(0,2).toUpperCase();
   var statusEl = document.getElementById('key-status-text');
-  if(statusEl) statusEl.textContent = '● AI features active';
+  if(statusEl) { statusEl.textContent = '● AI features active'; statusEl.style.color = 'var(--lime)'; }
 }
 
 async function doSignup() {
@@ -2270,19 +2263,12 @@ async function doSignup() {
   btn.textContent = 'Creating your account...';
   errEl.textContent = '';
   try {
-    // Save to backend
-    var res = await fetch('https://stelvai-backend-production.up.railway.app/api/signup', {
+    await fetch('https://stelvai-backend-production.up.railway.app/api/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, name: name, plan: _selectedPlan })
     });
-    var data = await res.json();
-    if(data.error && !data.error.includes('duplicate')) {
-      throw new Error(data.error);
-    }
-    // Save session locally
     saveSession({ email: email, name: name, plan: _selectedPlan });
-    // Enter dashboard
     closeAuth();
     document.getElementById('view-landing').style.display = 'none';
     document.getElementById('view-dashboard').style.display = 'block';
@@ -2290,7 +2276,7 @@ async function doSignup() {
     initDashboard();
     showToast('Welcome to Stelvai! 🎉', 'Your 14-day trial has started.');
   } catch(e) {
-    errEl.textContent = e.message || 'Something went wrong. Please try again.';
+    errEl.textContent = 'Something went wrong. Please try again.';
     btn.disabled = false;
     btn.textContent = 'Start 14-Day Free Trial →';
   }
@@ -2302,18 +2288,17 @@ async function doLogin() {
   var btn   = document.getElementById('login-btn');
   if(!email || !email.includes('@')) { errEl.textContent = 'Please enter a valid email.'; return; }
   btn.disabled = true;
-  btn.textContent = 'Checking account...';
+  btn.textContent = 'Signing in...';
   errEl.textContent = '';
   try {
-    // Check if user exists in backend
-    var res = await fetch('https://stelvai-backend-production.up.railway.app/api/signup', {
+    var res = await fetch('https://stelvai-backend-production.up.railway.app/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, plan: 'existing' })
+      body: JSON.stringify({ email: email })
     });
     var data = await res.json();
-    // Save session (email login — no password for now, magic-link style)
-    saveSession({ email: email, name: email.split('@')[0], plan: 'Growth' });
+    if(data.error) throw new Error(data.error);
+    saveSession({ email: email, name: data.name || email.split('@')[0], plan: data.plan || 'trial' });
     closeAuth();
     document.getElementById('view-landing').style.display = 'none';
     document.getElementById('view-dashboard').style.display = 'block';
@@ -2321,7 +2306,7 @@ async function doLogin() {
     initDashboard();
     showToast('Welcome back!', 'Signed in as ' + email);
   } catch(e) {
-    errEl.textContent = 'Could not sign in. Please check your email.';
+    errEl.textContent = 'No account found. Please sign up first.';
     btn.disabled = false;
     btn.textContent = 'Continue with Email →';
   }
@@ -2331,11 +2316,9 @@ function logout() {
   clearSession();
   document.getElementById('view-dashboard').style.display = 'none';
   document.getElementById('view-landing').style.display = 'block';
-  if(window._fixLandingBgs) window._fixLandingBgs();
   showToast('Signed out', 'See you next time!');
 }
 
-// Close auth modal on backdrop click
 document.getElementById('auth-modal').addEventListener('click', function(e){
   if(e.target === this) closeAuth();
 });
