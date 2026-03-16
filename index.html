@@ -615,7 +615,7 @@ footer{background:var(--white);border-top:1px solid var(--border);padding:2rem 2
     <li><a href="#pricing">Pricing</a></li>
   </ul>
   <div class="nav-right">
-    <button class="btn-ghost" onclick="openDashboard()">Sign In</button>
+    <button class="btn-ghost" onclick="openDashboard(true)">Sign In</button>
     <button class="btn-lime" onclick="openDashboard()">Start Free →</button>
   </div>
 </nav>
@@ -1521,11 +1521,28 @@ function updateKeyDisplay(){
 /* ═══════════════════════════════════════════════
    NAVIGATION
 ═══════════════════════════════════════════════ */
-function openDashboard(){
-  document.getElementById('key-modal').style.display='none'; // never show on open
-  document.getElementById('view-landing').style.display='none';
-  document.getElementById('view-dashboard').style.display='block';
-  initDashboard();
+function openDashboard(forceLogin){
+
+  const session = getSession();
+
+  if(session && !forceLogin){
+
+    document.getElementById('view-landing').style.display='none';
+
+    document.getElementById('view-dashboard').style.display='block';
+
+    loadUserSession(session);
+
+    initDashboard();
+
+    return;
+
+  }
+
+  document.getElementById('auth-modal').classList.add('show');
+
+  if(forceLogin) switchAuthTab('login');
+
 }
 function goBack(){
   document.getElementById('view-dashboard').style.display='none';
@@ -2092,5 +2109,300 @@ async function runLiveAudit() {
 </script>
 
 
+
+<style>
+#auth-modal {
+  position: fixed; inset: 0; z-index: 9998;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(12px);
+  display: none; align-items: center; justify-content: center;
+}
+#auth-modal.show { display: flex; }
+.auth-box {
+  background: #0e1020; border: 1px solid rgba(0,200,117,0.2);
+  border-radius: 20px; padding: 2.5rem; width: 100%; max-width: 440px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 60px rgba(0,200,117,0.06);
+  position: relative; animation: auth-rise 0.3s ease;
+}
+@keyframes auth-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.auth-logo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.4rem; font-weight: 800; letter-spacing: -0.04em;
+  color: #fff; text-align: center; margin-bottom: 0.4rem;
+}
+.auth-logo span { color: #00c875; }
+.auth-sub { font-size: 0.82rem; color: rgba(160,175,210,0.65); text-align: center; margin-bottom: 1.75rem; }
+.auth-tabs { display: flex; gap: 0; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09); border-radius: 10px;
+  overflow: hidden; margin-bottom: 1.75rem; }
+.auth-tab { flex: 1; padding: 0.6rem; font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 0.85rem; font-weight: 600; color: rgba(160,175,210,0.65);
+  background: transparent; border: none; cursor: pointer; transition: all 0.2s; }
+.auth-tab.active { background: #00c875; color: #020510; }
+.auth-field { margin-bottom: 1rem; }
+.auth-field label { font-size: 0.72rem; font-weight: 600; color: rgba(160,175,210,0.6);
+  text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.35rem; }
+.auth-input { width: 100%; background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14); color: #fff;
+  font-family: 'Bricolage Grotesque', sans-serif; font-size: 0.9rem;
+  padding: 0.72rem 1rem; border-radius: 9px; outline: none; transition: border-color 0.2s; }
+.auth-input:focus { border-color: #00c875; }
+.auth-input::placeholder { color: rgba(160,175,210,0.35); }
+.auth-plan-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.5rem; margin-bottom: 1rem; }
+.auth-plan-card { background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 10px; padding: 0.65rem 0.5rem; text-align: center; cursor: pointer; transition: all 0.2s; }
+.auth-plan-card:hover { border-color: rgba(0,200,117,0.3); }
+.auth-plan-card.selected { border-color: #00c875; background: rgba(0,200,117,0.08); }
+.auth-plan-card .plan-title { font-size: 0.78rem; font-weight: 700; color: #fff; }
+.auth-plan-card .plan-price { font-size: 0.72rem; color: rgba(160,175,210,0.6); margin-top: 0.2rem; }
+.auth-btn { width: 100%; background: #00c875; color: #020510;
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 0.95rem;
+  padding: 0.85rem; border-radius: 10px; border: none; cursor: pointer;
+  transition: all 0.2s; margin-top: 0.5rem; }
+.auth-btn:hover { background: #00a860; transform: translateY(-1px); }
+.auth-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.auth-error { font-size: 0.78rem; color: #ff6b8a; min-height: 1.2em; margin-bottom: 0.5rem; text-align: center; }
+.auth-switch { font-size: 0.78rem; color: rgba(160,175,210,0.55); text-align: center; margin-top: 1rem; }
+.auth-switch a { color: #00c875; cursor: pointer; text-decoration: none; }
+.auth-switch a:hover { text-decoration: underline; }
+.auth-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5);
+  width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 0.8rem;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.auth-close:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+.auth-divider { display: flex; align-items: center; gap: 0.75rem; margin: 1rem 0; }
+.auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+.auth-divider span { font-size: 0.72rem; color: rgba(160,175,210,0.4); }
+.auth-success { text-align: center; padding: 1rem 0; }
+.auth-success .check { font-size: 2.5rem; margin-bottom: 0.75rem; }
+.auth-success h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem;
+  font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+.auth-success p { font-size: 0.85rem; color: rgba(160,175,210,0.65); }
+</style>
+
+<script>
+/* ═══════════════════════════════════════════════
+   AUTH SYSTEM
+═══════════════════════════════════════════════ */
+
+var _selectedPlan = 'growth';
+
+function selectPlan(plan, el) {
+  _selectedPlan = plan;
+  document.querySelectorAll('.auth-plan-card').forEach(function(c){ c.classList.remove('selected'); });
+  el.classList.add('selected');
+}
+
+function switchAuthTab(tab) {
+  document.getElementById('auth-signup-form').style.display = tab === 'signup' ? 'block' : 'none';
+  document.getElementById('auth-login-form').style.display  = tab === 'login'  ? 'block' : 'none';
+  document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+  document.getElementById('tab-login').classList.toggle('active',  tab === 'login');
+  document.getElementById('auth-sub').textContent = tab === 'signup'
+    ? 'The AI visibility platform for B2B growth'
+    : 'Welcome back — sign in to your dashboard';
+  clearAuthErrors();
+}
+
+function closeAuth() {
+  document.getElementById('auth-modal').classList.remove('show');
+  clearAuthErrors();
+}
+
+function clearAuthErrors() {
+  var e1 = document.getElementById('signup-error');
+  var e2 = document.getElementById('login-error');
+  if(e1) e1.textContent = '';
+  if(e2) e2.textContent = '';
+}
+
+// Session management (localStorage)
+function getSession() {
+  try {
+    var s = localStorage.getItem('stelvai_session');
+    if(!s) return null;
+    var parsed = JSON.parse(s);
+    // Sessions expire after 30 days
+    if(Date.now() - parsed.ts > 30 * 24 * 60 * 60 * 1000) {
+      localStorage.removeItem('stelvai_session');
+      return null;
+    }
+    return parsed;
+  } catch(e) { return null; }
+}
+
+function saveSession(data) {
+  localStorage.setItem('stelvai_session', JSON.stringify({ ...data, ts: Date.now() }));
+}
+
+function clearSession() {
+  localStorage.removeItem('stelvai_session');
+}
+
+function loadUserSession(session) {
+  // Update the dashboard UI with user's name and plan
+  var nameEl = document.querySelector('.db-user-name');
+  var planEl = document.querySelector('.db-user-info');
+  var avatarEl = document.querySelector('.db-avatar');
+  if(nameEl) nameEl.textContent = session.name || session.email.split('@')[0];
+  if(planEl) {
+    planEl.innerHTML = '<div class="db-user-name">' + (session.name || session.email.split('@')[0]) + '</div>' + (session.plan || 'Trial') + ' Plan';
+  }
+  if(avatarEl) {
+    var initials = (session.name || session.email).substring(0,2).toUpperCase();
+    avatarEl.textContent = initials;
+  }
+  // Update key status
+  var statusEl = document.getElementById('key-status-text');
+  if(statusEl) statusEl.textContent = '● AI features active';
+}
+
+async function doSignup() {
+  var name  = document.getElementById('signup-name').value.trim();
+  var email = document.getElementById('signup-email').value.trim();
+  var errEl = document.getElementById('signup-error');
+  var btn   = document.getElementById('signup-btn');
+  if(!name)  { errEl.textContent = 'Please enter your name.'; return; }
+  if(!email || !email.includes('@')) { errEl.textContent = 'Please enter a valid email.'; return; }
+  btn.disabled = true;
+  btn.textContent = 'Creating your account...';
+  errEl.textContent = '';
+  try {
+    // Save to backend
+    var res = await fetch('https://stelvai-backend-production.up.railway.app/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, name: name, plan: _selectedPlan })
+    });
+    var data = await res.json();
+    if(data.error && !data.error.includes('duplicate')) {
+      throw new Error(data.error);
+    }
+    // Save session locally
+    saveSession({ email: email, name: name, plan: _selectedPlan });
+    // Enter dashboard
+    closeAuth();
+    document.getElementById('view-landing').style.display = 'none';
+    document.getElementById('view-dashboard').style.display = 'block';
+    loadUserSession(getSession());
+    initDashboard();
+    showToast('Welcome to Stelvai! 🎉', 'Your 14-day trial has started.');
+  } catch(e) {
+    errEl.textContent = e.message || 'Something went wrong. Please try again.';
+    btn.disabled = false;
+    btn.textContent = 'Start 14-Day Free Trial →';
+  }
+}
+
+async function doLogin() {
+  var email = document.getElementById('login-email').value.trim();
+  var errEl = document.getElementById('login-error');
+  var btn   = document.getElementById('login-btn');
+  if(!email || !email.includes('@')) { errEl.textContent = 'Please enter a valid email.'; return; }
+  btn.disabled = true;
+  btn.textContent = 'Checking account...';
+  errEl.textContent = '';
+  try {
+    // Check if user exists in backend
+    var res = await fetch('https://stelvai-backend-production.up.railway.app/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, plan: 'existing' })
+    });
+    var data = await res.json();
+    // Save session (email login — no password for now, magic-link style)
+    saveSession({ email: email, name: email.split('@')[0], plan: 'Growth' });
+    closeAuth();
+    document.getElementById('view-landing').style.display = 'none';
+    document.getElementById('view-dashboard').style.display = 'block';
+    loadUserSession(getSession());
+    initDashboard();
+    showToast('Welcome back!', 'Signed in as ' + email);
+  } catch(e) {
+    errEl.textContent = 'Could not sign in. Please check your email.';
+    btn.disabled = false;
+    btn.textContent = 'Continue with Email →';
+  }
+}
+
+function logout() {
+  clearSession();
+  document.getElementById('view-dashboard').style.display = 'none';
+  document.getElementById('view-landing').style.display = 'block';
+  if(window._fixLandingBgs) window._fixLandingBgs();
+  showToast('Signed out', 'See you next time!');
+}
+
+// Close auth modal on backdrop click
+document.getElementById('auth-modal').addEventListener('click', function(e){
+  if(e.target === this) closeAuth();
+});
+
+// Check session on page load — auto-restore if returning user
+(function(){
+  var session = getSession();
+  if(session) {
+    // Pre-fill the dashboard name so it's ready when they click Sign In
+    setTimeout(function(){ loadUserSession(session); }, 100);
+  }
+})();
+</script>
+
+<!-- ═══ AUTH MODAL ═══ -->
+<div id="auth-modal">
+  <div class="auth-box">
+    <button class="auth-close" onclick="closeAuth()">✕</button>
+    <div class="auth-logo">Stel<span>vai</span></div>
+    <div class="auth-sub" id="auth-sub">The AI visibility platform for B2B growth</div>
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-signup" onclick="switchAuthTab('signup')">Start Free</button>
+      <button class="auth-tab" id="tab-login" onclick="switchAuthTab('login')">Sign In</button>
+    </div>
+    <!-- Signup Form -->
+    <div id="auth-signup-form">
+      <div class="auth-field">
+        <label>Your Name</label>
+        <input class="auth-input" id="signup-name" type="text" placeholder="Jane Smith" autocomplete="name">
+      </div>
+      <div class="auth-field">
+        <label>Work Email</label>
+        <input class="auth-input" id="signup-email" type="email" placeholder="jane@company.com" autocomplete="email">
+      </div>
+      <div class="auth-field">
+        <label>Choose Plan</label>
+        <div class="auth-plan-grid">
+          <div class="auth-plan-card" onclick="selectPlan('starter',this)">
+            <div class="plan-title">Starter</div>
+            <div class="plan-price">$49/mo</div>
+          </div>
+          <div class="auth-plan-card selected" id="plan-growth" onclick="selectPlan('growth',this)">
+            <div class="plan-title">Growth ⭐</div>
+            <div class="plan-price">$149/mo</div>
+          </div>
+          <div class="auth-plan-card" onclick="selectPlan('scale',this)">
+            <div class="plan-title">Scale</div>
+            <div class="plan-price">$349/mo</div>
+          </div>
+        </div>
+      </div>
+      <div class="auth-error" id="signup-error"></div>
+      <button class="auth-btn" id="signup-btn" onclick="doSignup()">Start 14-Day Free Trial →</button>
+      <div class="auth-switch">Already have an account? <a onclick="switchAuthTab('login')">Sign in</a></div>
+    </div>
+    <!-- Login Form -->
+    <div id="auth-login-form" style="display:none">
+      <div class="auth-field">
+        <label>Email</label>
+        <input class="auth-input" id="login-email" type="email" placeholder="jane@company.com" autocomplete="email">
+      </div>
+      <div class="auth-error" id="login-error"></div>
+      <button class="auth-btn" id="login-btn" onclick="doLogin()">Continue with Email →</button>
+      <div class="auth-switch">No account? <a onclick="switchAuthTab('signup')">Start free trial</a></div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
